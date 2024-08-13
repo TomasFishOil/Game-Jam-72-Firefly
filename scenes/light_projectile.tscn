@@ -1,25 +1,25 @@
 [gd_scene load_steps=6 format=3 uid="uid://sng1scnr7o3y"]
 
 [ext_resource type="Script" path="res://scripts/light_projectile.gd" id="1_vhad8"]
-[ext_resource type="Texture2D" uid="uid://b2temtwwh1gg4" path="res://assets/car-top-view.svg" id="2_ua2ra"]
+[ext_resource type="Texture2D" uid="uid://k5651fowvn66" path="res://assets/light-orb-Sheet.svg" id="2_ggthn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wleu8"]
-atlas = ExtResource("2_ua2ra")
-region = Rect2(0, 0, 800, 800)
+[sub_resource type="AtlasTexture" id="AtlasTexture_npx1o"]
+atlas = ExtResource("2_ggthn")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_in1hu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wleu8")
+"texture": SubResource("AtlasTexture_npx1o")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
+"name": &"idle",
+"speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sp2uh"]
-size = Vector2(40, 19.6249)
+[sub_resource type="CircleShape2D" id="CircleShape2D_5lv2v"]
+radius = 16.0207
 
 [node name="LightProjectile" type="RigidBody2D"]
 collision_mask = 0
@@ -27,13 +27,16 @@ gravity_scale = 0.0
 script = ExtResource("1_vhad8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_in1hu")
+animation = &"idle"
+frame_progress = 0.315979
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.187493, -3.52859e-05)
 rotation = 1.5708
-shape = SubResource("RectangleShape2D_sp2uh")
+scale = Vector2(0.75, 0.75)
+shape = SubResource("CircleShape2D_5lv2v")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -1)
