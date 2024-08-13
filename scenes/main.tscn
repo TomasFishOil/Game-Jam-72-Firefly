@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dnlcsl0h4mgpy"]
 
 [ext_resource type="PackedScene" uid="uid://6orar16yxpcb" path="res://scenes/firefly_player.tscn" id="1_g661c"]
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_iwp0e"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_iwp0e"]
 [ext_resource type="PackedScene" uid="uid://sng1scnr7o3y" path="res://scenes/light_projectile.tscn" id="2_vrx3n"]
 
 [sub_resource type="Curve2D" id="Curve2D_lptqb"]
