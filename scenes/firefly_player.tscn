@@ -53,8 +53,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgpe4"]
-radius = 10.5
-height = 32.0
+radius = 13.5
+height = 36.0
 
 [node name="FireflyPlayer" type="Area2D"]
 position = Vector2(1, -1)
@@ -64,10 +64,10 @@ script = ExtResource("1_2mb1i")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5wdbi")
 animation = &"idle"
-frame_progress = 0.943378
+frame_progress = 0.934055
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 0)
+position = Vector2(0, -5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dgpe4")
 
