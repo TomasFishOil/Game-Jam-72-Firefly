@@ -50,4 +50,8 @@ func _on_body_entered(_body):
 	
 	#ensures multiple hits dont come from one projectile
 	$CollisionShape2D.set_deferred("disabled", true)
-	
+
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
