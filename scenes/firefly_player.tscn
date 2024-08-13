@@ -1,20 +1,20 @@
 [gd_scene load_steps=6 format=3 uid="uid://6orar16yxpcb"]
 
 [ext_resource type="Script" path="res://scripts/firefly_player.gd" id="1_2mb1i"]
-[ext_resource type="Texture2D" uid="uid://dmu6a0dscpiqf" path="res://assets/mothtester.svg" id="2_lvdx8"]
+[ext_resource type="Texture2D" uid="uid://b50umopbpq58o" path="res://assets/Fireflynoanimation.svg" id="2_mouvo"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ocvd"]
-atlas = ExtResource("2_lvdx8")
-region = Rect2(0, 0, 1707, 973)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0obr"]
+atlas = ExtResource("2_mouvo")
+region = Rect2(0, 0, 63, 45)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5wdbi"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8ocvd")
+"texture": SubResource("AtlasTexture_l0obr")
 }],
 "loop": true,
-"name": &"default",
+"name": &"new_animation",
 "speed": 5.0
 }]
 
@@ -22,14 +22,13 @@ animations = [{
 size = Vector2(260, 180)
 
 [node name="FireflyPlayer" type="Area2D"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(2, 2)
 script = ExtResource("1_2mb1i")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.16, 0.16)
 sprite_frames = SubResource("SpriteFrames_5wdbi")
-frame_progress = 0.491182
+animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-9.53676e-07, -4.76837e-06)
