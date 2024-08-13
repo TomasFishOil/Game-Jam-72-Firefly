@@ -10,7 +10,7 @@ func _ready():
 func _process(delta):
 	pass
 
-#projectile deletes itself upon exiting the screen
+#after detected off the screen, the projectile deletes itself
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
