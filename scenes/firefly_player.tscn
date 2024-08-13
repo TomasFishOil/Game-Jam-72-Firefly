@@ -1,7 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://6orar16yxpcb"]
+[gd_scene load_steps=11 format=3 uid="uid://6orar16yxpcb"]
 
 [ext_resource type="Script" path="res://scripts/firefly_player.gd" id="1_2mb1i"]
+[ext_resource type="Texture2D" uid="uid://dha3y8dupxkwk" path="res://assets/Fireflynoanimation-Sheet.svg" id="2_i2u4h"]
 [ext_resource type="Texture2D" uid="uid://b50umopbpq58o" path="res://assets/Fireflynoanimation.svg" id="2_mouvo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yp4w0"]
+atlas = ExtResource("2_i2u4h")
+region = Rect2(0, 0, 63, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yiej"]
+atlas = ExtResource("2_i2u4h")
+region = Rect2(63, 0, 63, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3wnt"]
+atlas = ExtResource("2_i2u4h")
+region = Rect2(126, 0, 63, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgrj7"]
+atlas = ExtResource("2_i2u4h")
+region = Rect2(189, 0, 63, 45)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l0obr"]
 atlas = ExtResource("2_mouvo")
@@ -9,6 +26,23 @@ region = Rect2(0, 0, 63, 45)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5wdbi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yp4w0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yiej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3wnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgrj7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l0obr")
@@ -29,7 +63,8 @@ script = ExtResource("1_2mb1i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5wdbi")
-animation = &"new_animation"
+animation = &"idle"
+frame_progress = 0.943378
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 0)
