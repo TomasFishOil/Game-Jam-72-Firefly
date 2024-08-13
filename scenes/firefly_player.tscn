@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://6orar16yxpcb"]
+
+[ext_resource type="Script" path="res://scripts/firefly_player.gd" id="1_2mb1i"]
+[ext_resource type="Texture2D" uid="uid://cpsqv2i185t6m" path="res://assets/red.png" id="2_67ldc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ml16"]
+atlas = ExtResource("2_67ldc")
+region = Rect2(0, 0, 261, 193)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5wdbi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ml16")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_armm1"]
+size = Vector2(260, 180)
+
+[node name="FireflyPlayer" type="Area2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_2mb1i")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5wdbi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9.53676e-07, -4.76837e-06)
+shape = SubResource("RectangleShape2D_armm1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
