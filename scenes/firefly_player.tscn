@@ -18,20 +18,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_armm1"]
-size = Vector2(260, 180)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgpe4"]
+radius = 10.5
+height = 32.0
 
 [node name="FireflyPlayer" type="Area2D"]
+position = Vector2(1, -1)
 scale = Vector2(2, 2)
 script = ExtResource("1_2mb1i")
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5wdbi")
 animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-9.53676e-07, -4.76837e-06)
-shape = SubResource("RectangleShape2D_armm1")
+position = Vector2(1.5, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dgpe4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
