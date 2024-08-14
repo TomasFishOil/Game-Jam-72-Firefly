@@ -30,7 +30,7 @@ script = ExtResource("1_vhad8")
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_in1hu")
 animation = &"idle"
-frame_progress = 0.315979
+frame_progress = 0.221365
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.187493, -3.52859e-05)

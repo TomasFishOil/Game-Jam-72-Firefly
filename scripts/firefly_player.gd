@@ -43,6 +43,7 @@ func _process(delta):
 	position = position.clamp(Vector2.ZERO, screen_size)  
 	
 
+# Collision Function
 #green icon means the function doesn't exist, only that the signal will attempt to connect to a function with this name
 func _on_body_entered(_body):
 	hide() #makes player disappear on hit (need to change to emiting light and increasing bar)
