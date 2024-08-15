@@ -22,8 +22,10 @@ func _process(delta):
 	#Input.is_action_pressed returns TRUE if pressed and FALSE if not
 	if Input.is_action_pressed("move_right"):  
 		velocity.x += 1
+		$AnimatedSprite2D.play('right')
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
+		$AnimatedSprite2D.play('left')
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 	if Input.is_action_pressed("move_down"):
@@ -48,6 +50,7 @@ func _process(delta):
 func _on_body_entered(body):
 	light_contact.emit()
 	body.queue_free()
+
 
 func start(pos):
 	position = pos
