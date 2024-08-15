@@ -53,6 +53,7 @@ func _game_over(value):
 
 func _on_firefly_player_light_contact():
 	light_level.value += 10
+	
 
 # Timer Methods
 func _on_score_timer_timeout():
