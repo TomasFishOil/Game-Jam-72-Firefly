@@ -1,47 +1,47 @@
 [gd_scene load_steps=9 format=3 uid="uid://6orar16yxpcb"]
 
 [ext_resource type="Script" path="res://scripts/firefly_player.gd" id="1_2mb1i"]
-[ext_resource type="Texture2D" uid="uid://dehg8k6r0ybmk" path="res://assets/FireflySpriteSheet..svg" id="2_m6e2r"]
+[ext_resource type="Texture2D" uid="uid://dehg8k6r0ybmk" path="res://assets/FireflySpriteSheet..svg" id="2_e3bvx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ljflr"]
-atlas = ExtResource("2_m6e2r")
+[sub_resource type="AtlasTexture" id="AtlasTexture_26owq"]
+atlas = ExtResource("2_e3bvx")
 region = Rect2(0, 0, 63, 45)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aouc7"]
-atlas = ExtResource("2_m6e2r")
+[sub_resource type="AtlasTexture" id="AtlasTexture_bweui"]
+atlas = ExtResource("2_e3bvx")
 region = Rect2(63, 0, 63, 45)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o2iaf"]
-atlas = ExtResource("2_m6e2r")
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq0vt"]
+atlas = ExtResource("2_e3bvx")
 region = Rect2(126, 0, 63, 45)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ky0uv"]
-atlas = ExtResource("2_m6e2r")
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkse2"]
+atlas = ExtResource("2_e3bvx")
 region = Rect2(189, 0, 63, 45)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5wdbi"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ljflr")
+"texture": SubResource("AtlasTexture_26owq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aouc7")
+"texture": SubResource("AtlasTexture_bweui")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o2iaf")
+"texture": SubResource("AtlasTexture_uq0vt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ky0uv")
+"texture": SubResource("AtlasTexture_mkse2")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgpe4"]
-radius = 14.5
-height = 38.0
+radius = 13.5
+height = 36.0
 
 [node name="FireflyPlayer" type="Area2D"]
 position = Vector2(1, -1)
@@ -51,11 +51,10 @@ script = ExtResource("1_2mb1i")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5wdbi")
 animation = &"idle"
-frame = 3
-frame_progress = 0.465831
+frame_progress = 0.875703
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, -5)
+position = Vector2(0, -5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dgpe4")
 

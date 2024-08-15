@@ -2,6 +2,7 @@ extends Node
 
 @export var light_scene: PackedScene
 var score
+@onready var light_level = $CanvasLayer/ProgressBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,13 +10,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	light_level.value -= 0.1
+	
+	if light_level.value == 0:
+		$ScoreTimer.stop()
+		$LightTimer.stop()
+		print('Final Score:', score)
 
 # Game Over
 func _on_firefly_player_light_contact():
-	$ScoreTimer.stop()
-	$LightTimer.stop()
-	print('Final Score:', score)
+	light_level.value += 10
 
 func new_game():
 	score = 0

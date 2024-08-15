@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnlcsl0h4mgpy"]
+[gd_scene load_steps=6 format=3 uid="uid://dnlcsl0h4mgpy"]
 
 [ext_resource type="PackedScene" uid="uid://6orar16yxpcb" path="res://scenes/firefly_player.tscn" id="1_g661c"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_iwp0e"]
 [ext_resource type="PackedScene" uid="uid://sng1scnr7o3y" path="res://scenes/light_projectile.tscn" id="2_vrx3n"]
+[ext_resource type="PackedScene" uid="uid://mq4kgpqbqbsw" path="res://scenes/light_bar.tscn" id="4_juvgx"]
 
 [sub_resource type="Curve2D" id="Curve2D_lptqb"]
 _data = {
@@ -21,6 +22,8 @@ position = Vector2(348, 202)
 wait_time = 0.5
 
 [node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("4_juvgx")]
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0

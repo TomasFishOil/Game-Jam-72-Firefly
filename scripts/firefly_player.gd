@@ -35,7 +35,7 @@ func _process(delta):
 		 #$ is short for "get_node"... relative path
 		$AnimatedSprite2D.play()     
 	else:
-		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.play()
 	
 	#using delta ensures position remains consisten regardless of FPS, this updates player position
 	position += velocity * delta  
@@ -46,11 +46,7 @@ func _process(delta):
 # Collision Function
 #green icon means the function doesn't exist, only that the signal will attempt to connect to a function with this name
 func _on_body_entered(_body):
-	hide() #makes player disappear on hit (need to change to emiting light and increasing bar)
 	light_contact.emit()
-	
-	#ensures multiple hits dont come from one projectile
-	$CollisionShape2D.set_deferred("disabled", true)
 
 func start(pos):
 	position = pos
