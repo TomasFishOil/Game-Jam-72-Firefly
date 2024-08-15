@@ -45,8 +45,9 @@ func _process(delta):
 
 # Collision Function
 #green icon means the function doesn't exist, only that the signal will attempt to connect to a function with this name
-func _on_body_entered(_body):
+func _on_body_entered(body):
 	light_contact.emit()
+	body.queue_free()
 
 func start(pos):
 	position = pos
