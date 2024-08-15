@@ -17,7 +17,8 @@ const BOTTOM_LEFT = PI/2
 
 # Global Variabels
 var score: int
-var boss_attacks: Array[Callable] = [x_attack, ball_attack] # stores uncalled attack functions
+# stores attack functions as callable functions, meaning you can use .call() as if you were just using ()
+var boss_attacks: Array[Callable] = [x_attack, ball_attack, vert_line_attack, hori_line_attack] 
 var orb_speed: Vector2 = Vector2(150, 150)
 
 
@@ -65,30 +66,32 @@ func _on_start_timer_timeout():
 func _on_light_timer_timeout():
 	# Choses a random index from all light spawns, then calls .position on them to get (x, y) coord
 	var spawn_loc = light_spawn_locs[randi_range(0, len(light_spawn_locs)-1)].position
+	var attack_pattern = boss_attacks[randi_range(0, len(boss_attacks)-1)]
 	for x in 5:
 		# Chooses a random attack from boss_attacks and calls .call on it
-		#  .call is the same as using () to call a function,
-		#   we just have to use .call() cuz im doing fancy stuff
-		#   that saves space, complexity, and makes things more readable!
-		boss_attacks[randi_range(0, len(boss_attacks)-1)].call(spawn_loc)
+		#   .call is the same as using () to call a function,
+		#   we just have to use .call() cuz im doing fancy stuff that
+		#   saves space, complexity, and makes things more readable!
+		# Feel free to remove this comment if u get it, its big and ugly
+		attack_pattern.call(spawn_loc)
 		
 		# Creates a temporary timer in the current session
 		#  that pauses this method for 0.5 seconds
-		await get_tree().create_timer(0.5).timeout	
+		await get_tree().create_timer(0.5).timeout
 
 # Boss Attacks!
 # Creates a singular light orb, method created to reduce reptitive code
 func create_light_orb(direction, pos):
 	# Create light particle from global variable packed scene (look above)
-		var light_particle = light_scene.instantiate()
-		light_particle.position = pos # Sets position to pos, a randomized marker
-		
-		var velocity = orb_speed # Set the speed of the balls through vector
-		# Rotates balls by direction chosen in the for-each loop
-		light_particle.linear_velocity = velocity.rotated(direction)
+	var light_particle = light_scene.instantiate()
+	light_particle.position = pos # Sets position to pos, a randomized marker
+	
+	var velocity = orb_speed # Set the speed of the balls through vector
+	# Rotates balls by direction chosen in the for-each loop
+	light_particle.linear_velocity = velocity.rotated(direction)
 
-		# Spawns light orb
-		add_child(light_particle)
+	# Spawns light orb
+	add_child(light_particle)
 
 func x_attack(pos):
 	# Basically a for-each loop but in gdscript (python) syntax
@@ -99,6 +102,13 @@ func ball_attack(pos):
 	for direction in [UP, DOWN, LEFT, RIGHT, TOP_RIGHT, TOP_LEFT, BOTTOM_LEFT, BOTTOM_RIGHT]:
 		create_light_orb(direction, pos)
 
+func vert_line_attack(pos):
+	for direction in [UP, DOWN]:
+		create_light_orb(direction, pos)
+
+func hori_line_attack(pos):
+	for direction in [LEFT, RIGHT]:
+		create_light_orb(direction, pos)
 
 
 # OLD CODE THAT WE MIGHT FIND USEFUL TO LOOK BACK ON, DEPRECATED
