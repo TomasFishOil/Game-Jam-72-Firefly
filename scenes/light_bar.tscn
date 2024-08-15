@@ -24,3 +24,5 @@ theme_override_styles/background = SubResource("StyleBoxFlat_dwd1n")
 theme_override_styles/fill = SubResource("StyleBoxFlat_abbff")
 value = 100.0
 show_percentage = false
+
+[connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]

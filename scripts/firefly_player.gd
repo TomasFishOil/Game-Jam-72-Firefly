@@ -13,8 +13,6 @@ func _ready():
 	#finds screen size 
 	screen_size = get_viewport_rect().size 
 
-
-
 #Called every frame. 'delta' is the elapsed time since the previous frame. Good for updating elements in the game
 func _process(delta):
 	#Player movement vector (Vector2 is just a 2d vector, ZERO is the coords (0,0)
@@ -50,7 +48,6 @@ func _process(delta):
 func _on_body_entered(body):
 	light_contact.emit()
 	body.queue_free()
-
 
 func start(pos):
 	position = pos

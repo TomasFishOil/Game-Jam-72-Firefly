@@ -16,7 +16,7 @@ script = ExtResource("1_iwp0e")
 light_scene = ExtResource("2_vrx3n")
 
 [node name="FireflyPlayer" parent="." instance=ExtResource("1_g661c")]
-position = Vector2(58, 58)
+position = Vector2(348, 202)
 
 [node name="LightTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -29,13 +29,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(331, 425)
-
-[node name="LightSpawn1" type="Marker2D" parent="."]
-position = Vector2(470, 155)
-
-[node name="LightSpawn2" type="Marker2D" parent="."]
-position = Vector2(174, 677)
+position = Vector2(240, 450)
 
 [node name="LightPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_lptqb")

@@ -14,6 +14,11 @@ config/name="Game-jam-72-firefly"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=648
+window/size/viewport_height=990
+
 [input]
 
 move_right={

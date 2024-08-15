@@ -1,8 +1,8 @@
 extends Node
 
 @export var light_scene: PackedScene
-var score
 @onready var light_level = $CanvasLayer/ProgressBar
+var score
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,10 +11,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	light_level.value -= 0.1
-	
-	if light_level.value == 0:
+
+func _game_over(value):
+	if value == 0:
 		$ScoreTimer.stop()
 		$LightTimer.stop()
+		$FireflyPlayer.queue_free()
+		$CanvasLayer/ProgressBar.hide()
 		print('Final Score:', score)
 
 # Game Over
@@ -28,13 +31,40 @@ func new_game():
 
 func _on_score_timer_timeout():
 	score += 1
-	print(score)
 
 func _on_start_timer_timeout():
 	$LightTimer.start()
 	$ScoreTimer.start()
 
+func line_attack(pos):
+	# Creates new instance of the mob scene
+	var light_particle = light_scene.instantiate()
+	
+	# Set the light particle's position to a random location
+	light_particle.position = pos
+
+	# Choose velocity for light particle
+	var velocity = Vector2(50, 50)
+	light_particle.linear_velocity = velocity.rotated(PI / 4)
+	
+	# Spawn the light partile
+	add_child(light_particle)
+	
+
 func _on_light_timer_timeout():
+	# 3 functions
+	#  3 types of moves
+	#   An X
+	#   A ball
+	#   A line
+	
+	# 5 Markers
+	#  Different spawn locations for each move
+	
+	line_attack($LightSpawn1.position)
+	
+	
+	"""
 	# Creates new instance of the mob scene
 	var light_particle = light_scene.instantiate()
 	
@@ -58,4 +88,4 @@ func _on_light_timer_timeout():
 	
 	# Spawn the light partile
 	add_child(light_particle)
-
+	"""
