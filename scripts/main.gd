@@ -23,6 +23,7 @@ func _game_over(value):
 # Game Over
 func _on_firefly_player_light_contact():
 	light_level.value += 10
+	
 
 func new_game():
 	score = 0

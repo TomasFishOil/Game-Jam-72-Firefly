@@ -3,8 +3,17 @@ extends Area2D
 #speed at which the player will move in pixels/sec... @export allows us to see speed in inspector and change easily
 #changing speed in the inspector will cause the speed in the script to be overriden
 @export var firefly_speed = 400  
+@export var dash_orb_count = 0
+
 #play area
 var screen_size  
+
+#Dash variables
+var dash = false
+var dash_availible = true
+const DASH_SPEED = 1000
+
+
 #custom signal that moth player will emit upon coming into contact with a projectile
 signal light_contact
 
@@ -28,15 +37,25 @@ func _process(delta):
 		velocity.y -= 1
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
-
+	if Input.is_action_just_pressed("dash") and dash_availible:
+		dash = true
+		dash_availible = false
+		$DashTimer.start()
+		$DashCoolDown.start()
+		print("DASH")   #Debugging
+		
 #normalizes veloctiy speed (sets vector length to 1) so moving diagonally doesnt make you go faster
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * firefly_speed  
 		 #$ is short for "get_node"... relative path
-		$AnimatedSprite2D.play()     
+		#$AnimatedSprite2D.play()     
 	else:
 		$AnimatedSprite2D.play('idle')
 	
+	#Checks for dashing, if dashing gives dash speed
+	if dash:
+		velocity = velocity.normalized() * DASH_SPEED
+		
 	#using delta ensures position remains consisten regardless of FPS, this updates player position
 	position += velocity * delta  
 	#preventing player from leaving the screen
@@ -48,8 +67,23 @@ func _process(delta):
 func _on_body_entered(body):
 	light_contact.emit()
 	body.queue_free()
+	dash_orb_count += 1
+	print(dash_orb_count)  #debuggin
+	#Dash cooldown refund on 10 orb collection
+	if dash_orb_count == 10:
+		dash_availible = true
+		$DashCoolDown.start()
+		dash_orb_count = 0
+		print('dash refunded!')
 
 func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+
+func _on_dash_timer_timeout():
+	dash = false
+
+func _on_dash_cool_down_timeout():
+	dash_availible = true
+	print("dash availible")
