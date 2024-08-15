@@ -1,16 +1,47 @@
 extends Node
 
+# Directions
+const UP = 5*PI/4
+const DOWN = PI/4
+const RIGHT = 7*PI/4
+const LEFT = 3*PI/4
+const TOP_RIGHT = 3*PI/2
+const TOP_LEFT = PI
+const BOTTOM_RIGHT = 0
+const BOTTOM_LEFT = PI/2
+
+# Godot Elements
 @export var light_scene: PackedScene
 @onready var light_level = $CanvasLayer/ProgressBar
-var score
+@onready var light_spawn_locs = $Orbs.get_children() # returns all children of $Orbs as a list
+
+# Global Variabels
+var score: int
+var boss_attacks: Array[Callable] = [x_attack, ball_attack] # stores uncalled attack functions
+var orb_speed: Vector2 = Vector2(150, 150)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# So ima just explain this here and u can delete this later tomas,
+	#  Here i'm making the waittime initially near 0 so i can immedaitely
+	#  spawn the orbs, then i start the timer, orbs immediately spawn,
+	#  then i make wait time back to 5
+	# I've only done this thing for now since im just testing code and whatnot
+	#  actual functional project will have attacks more orchestrated! 
+	$LightTimer.wait_time = 0.1
+	$LightTimer.start()
+	$LightTimer.wait_time = 5
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	light_level.value -= 0.1
+
+func new_game():
+	score = 0
+	$FireflyPlayer.start($StartPosition.position)
+	$StartTimer.start()
 
 func _game_over(value):
 	if value == 0:
@@ -20,51 +51,57 @@ func _game_over(value):
 		$CanvasLayer/ProgressBar.hide()
 		print('Final Score:', score)
 
-# Game Over
 func _on_firefly_player_light_contact():
 	light_level.value += 10
 
-func new_game():
-	score = 0
-	$FireflyPlayer.start($StartPosition.position)
-	$StartTimer.start()
-
+# Timer Methods
 func _on_score_timer_timeout():
 	score += 1
 
 func _on_start_timer_timeout():
-	$LightTimer.start()
 	$ScoreTimer.start()
 
-func line_attack(pos):
-	# Creates new instance of the mob scene
-	var light_particle = light_scene.instantiate()
-	
-	# Set the light particle's position to a random location
-	light_particle.position = pos
-
-	# Choose velocity for light particle
-	var velocity = Vector2(50, 50)
-	light_particle.linear_velocity = velocity.rotated(PI / 4)
-	
-	# Spawn the light partile
-	add_child(light_particle)
-	
-
 func _on_light_timer_timeout():
-	# 3 functions
-	#  3 types of moves
-	#   An X
-	#   A ball
-	#   A line
-	
-	# 5 Markers
-	#  Different spawn locations for each move
-	
-	line_attack($LightSpawn1.position)
-	
-	
-	"""
+	# Choses a random index from all light spawns, then calls .position on them to get (x, y) coord
+	var spawn_loc = light_spawn_locs[randi_range(0, len(light_spawn_locs)-1)].position
+	for x in 5:
+		# Chooses a random attack from boss_attacks and calls .call on it
+		#  .call is the same as using () to call a function,
+		#   we just have to use .call() cuz im doing fancy stuff
+		#   that saves space, complexity, and makes things more readable!
+		boss_attacks[randi_range(0, len(boss_attacks)-1)].call(spawn_loc)
+		
+		# Creates a temporary timer in the current session
+		#  that pauses this method for 0.5 seconds
+		await get_tree().create_timer(0.5).timeout	
+
+# Boss Attacks!
+# Creates a singular light orb, method created to reduce reptitive code
+func create_light_orb(direction, pos):
+	# Create light particle from global variable packed scene (look above)
+		var light_particle = light_scene.instantiate()
+		light_particle.position = pos # Sets position to pos, a randomized marker
+		
+		var velocity = orb_speed # Set the speed of the balls through vector
+		# Rotates balls by direction chosen in the for-each loop
+		light_particle.linear_velocity = velocity.rotated(direction)
+
+		# Spawns light orb
+		add_child(light_particle)
+
+func x_attack(pos):
+	# Basically a for-each loop but in gdscript (python) syntax
+	for direction in [TOP_RIGHT, TOP_LEFT, BOTTOM_LEFT, BOTTOM_RIGHT]:
+		create_light_orb(direction, pos)
+
+func ball_attack(pos):
+	for direction in [UP, DOWN, LEFT, RIGHT, TOP_RIGHT, TOP_LEFT, BOTTOM_LEFT, BOTTOM_RIGHT]:
+		create_light_orb(direction, pos)
+
+
+
+# OLD CODE THAT WE MIGHT FIND USEFUL TO LOOK BACK ON, DEPRECATED
+func og_rand_attack():
 	# Creates new instance of the mob scene
 	var light_particle = light_scene.instantiate()
 	
@@ -84,8 +121,7 @@ func _on_light_timer_timeout():
 	
 	# Choose velocity for light particle
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	light_particle.linear_velocity = velocity.rotated(direction)
+	light_particle.linear_velocity = velocity.rotated(UP)
 	
 	# Spawn the light partile
 	add_child(light_particle)
-	"""
