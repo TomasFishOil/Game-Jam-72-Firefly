@@ -37,7 +37,7 @@ func _process(delta):
 		 #$ is short for "get_node"... relative path
 		$AnimatedSprite2D.play()     
 	else:
-		$AnimatedSprite2D.play()
+		$AnimatedSprite2D.play('idle')
 	
 	#using delta ensures position remains consisten regardless of FPS, this updates player position
 	position += velocity * delta  
