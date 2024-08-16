@@ -19,7 +19,7 @@ light_scene = ExtResource("2_vrx3n")
 position = Vector2(3, 11)
 
 [node name="LightTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 0.5
 
 [node name="ScoreTimer" type="Timer" parent="."]
 

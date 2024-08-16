@@ -1,29 +1,22 @@
 [gd_scene format=3 uid="uid://ch3h14g3uqmiy"]
 
 [node name="Main Menu" type="Control"]
+custom_minimum_size = Vector2(0, 500)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
+[node name="StartButton" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 100)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-vertical = true
-
-[node name="Play Button" type="Button" parent="BoxContainer"]
-layout_mode = 2
-text = "Play"
-
-[node name="Settings Button" type="Button" parent="BoxContainer"]
-layout_mode = 2
-text = "Settings
-"
-
-[node name="Credits Button" type="Button" parent="BoxContainer"]
-layout_mode = 2
-text = "Credits
-"
+offset_left = -99.0
+offset_top = -4.0
+offset_right = 101.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 60
+text = "Start"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://sng1scnr7o3y"]
+[gd_scene load_steps=7 format=3 uid="uid://sng1scnr7o3y"]
 
 [ext_resource type="Script" path="res://scripts/light_projectile.gd" id="1_vhad8"]
 [ext_resource type="Texture2D" uid="uid://k5651fowvn66" path="res://assets/light-orb-Sheet.svg" id="2_ggthn"]
@@ -21,12 +21,17 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lv2v"]
 radius = 16.0207
 
+[sub_resource type="Environment" id="Environment_7ld50"]
+background_mode = 3
+glow_enabled = true
+
 [node name="LightProjectile" type="RigidBody2D"]
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_vhad8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(2, 2, 1, 1)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_in1hu")
 animation = &"idle"
@@ -41,5 +46,8 @@ shape = SubResource("CircleShape2D_5lv2v")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -1)
 scale = Vector2(3.29609, 3.17813)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7ld50")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

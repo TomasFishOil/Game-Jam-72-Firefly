@@ -19,25 +19,19 @@ const BOTTOM_LEFT = PI/2
 var score: int
 # stores attack functions as callable functions, meaning you can use .call() as if you were just using ()
 var boss_attacks: Array[Callable] = [x_attack, ball_attack, vert_line_attack, hori_line_attack] 
-var orb_speed: Vector2 = Vector2(150, 150)
+var orb_speed: Vector2 = Vector2(200, 200)
+var orb_spawn_speed: float = 0.25
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# So ima just explain this here and u can delete this later tomas,
-	#  Here i'm making the waittime initially near 0 so i can immedaitely
-	#  spawn the orbs, then i start the timer, orbs immediately spawn,
-	#  then i make wait time back to 5
-	# I've only done this thing for now since im just testing code and whatnot
-	#  actual functional project will have attacks more orchestrated! 
-	$LightTimer.wait_time = 0.1
 	$LightTimer.start()
-	$LightTimer.wait_time = 5
+	$LightTimer.wait_time = 3
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	light_level.value -= 0.1
+	light_level.value -= 0.2
 
 func new_game():
 	score = 0
@@ -66,18 +60,15 @@ func _on_start_timer_timeout():
 func _on_light_timer_timeout():
 	# Choses a random index from all light spawns, then calls .position on them to get (x, y) coord
 	var spawn_loc = light_spawn_locs[randi_range(0, len(light_spawn_locs)-1)].position
-	var attack_pattern = boss_attacks[randi_range(0, len(boss_attacks)-1)]
-	for x in 5:
-		# Chooses a random attack from boss_attacks and calls .call on it
-		#   .call is the same as using () to call a function,
-		#   we just have to use .call() cuz im doing fancy stuff that
-		#   saves space, complexity, and makes things more readable!
-		# Feel free to remove this comment if u get it, its big and ugly
-		attack_pattern.call(spawn_loc)
-		
-		# Creates a temporary timer in the current session
-		#  that pauses this method for 0.5 seconds
-		await get_tree().create_timer(0.5).timeout
+	var attack_pattern: Callable = boss_attacks[randi_range(0, len(boss_attacks)-1)]
+	
+	# Chooses a random attack from boss_attacks and calls .call on it
+	#   .call is the same as using () to call a function,
+	#   we just have to use .call() cuz im doing fancy stuff that
+	#   saves space, complexity, and makes things more readable!
+	# Feel free to remove this comment if u get it, its big and ugly
+	attack_pattern.call(spawn_loc)
+	
 
 # Boss Attacks!
 # Creates a singular light orb, method created to reduce reptitive code
@@ -94,21 +85,32 @@ func create_light_orb(direction, pos):
 	add_child(light_particle)
 
 func x_attack(pos):
-	# Basically a for-each loop but in gdscript (python) syntax
-	for direction in [TOP_RIGHT, TOP_LEFT, BOTTOM_LEFT, BOTTOM_RIGHT]:
-		create_light_orb(direction, pos)
+	for x in 5:
+		# Basically a for-each loop but in gdscript (python) syntax
+		for direction in [TOP_RIGHT, TOP_LEFT, BOTTOM_LEFT, BOTTOM_RIGHT]:
+			create_light_orb(direction, pos)
+		
+		# Creates a temporary timer in the current session
+		#  that pauses this method for 0.5 seconds
+		await get_tree().create_timer(orb_spawn_speed).timeout
 
 func ball_attack(pos):
-	for direction in [UP, DOWN, LEFT, RIGHT, TOP_RIGHT, TOP_LEFT, BOTTOM_LEFT, BOTTOM_RIGHT]:
-		create_light_orb(direction, pos)
+	for x in 4:
+		for direction in [UP, DOWN, LEFT, RIGHT, TOP_RIGHT, TOP_LEFT, BOTTOM_LEFT, BOTTOM_RIGHT]:
+			create_light_orb(direction, pos)
+		await get_tree().create_timer(orb_spawn_speed).timeout
 
 func vert_line_attack(pos):
-	for direction in [UP, DOWN]:
-		create_light_orb(direction, pos)
+	for x in 7:
+		for direction in [UP, DOWN]:
+			create_light_orb(direction, pos)
+		await get_tree().create_timer(orb_spawn_speed).timeout
 
 func hori_line_attack(pos):
-	for direction in [LEFT, RIGHT]:
-		create_light_orb(direction, pos)
+	for x in 7:
+		for direction in [LEFT, RIGHT]:
+			create_light_orb(direction, pos)
+		await get_tree().create_timer(orb_spawn_speed).timeout
 
 
 # OLD CODE THAT WE MIGHT FIND USEFUL TO LOOK BACK ON, DEPRECATED
