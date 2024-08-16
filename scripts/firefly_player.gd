@@ -33,16 +33,37 @@ func _process(delta):
 			$AnimatedSprite2D.play("dash_right")
 		else:
 			$AnimatedSprite2D.play('right')
+	
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
 		if dash:
 			$AnimatedSprite2D.play("dash_left")
 		else:
 			$AnimatedSprite2D.play('left')
+	
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+		if dash:
+			# Okay tomas this is a match statement (i might call it switch sometimes)
+			#  its literally just a fancier if else statement that is alot easier
+			#  on the eyes. 
+			# What this is doing is looking at the firefly's animation
+			#  and changing its sprite to dash left or right depending on
+			#  whether .animation returns 'right' or 'left' 
+			match $AnimatedSprite2D.animation:
+				'right':
+					$AnimatedSprite2D.play("dash_right")
+				'left':
+					$AnimatedSprite2D.play("dash_left")
+	
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
+		match $AnimatedSprite2D.animation:
+				'right':
+					$AnimatedSprite2D.play("dash_right")
+				'left':
+					$AnimatedSprite2D.play("dash_left")
+	
 	if Input.is_action_just_pressed("dash") and dash_availible:
 		dash = true
 		dash_availible = false
@@ -50,15 +71,22 @@ func _process(delta):
 		$DashCoolDown.start()
 		print("DASH")   #Debugging
 		
-#normalizes veloctiy speed (sets vector length to 1) so moving diagonally doesnt make you go faster
+	#normalizes veloctiy speed (sets vector length to 1) so moving diagonally doesnt make you go faster
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * firefly_speed  
-	
 	
 	#Checks for dashing, if dashing gives dash speed
 	if dash:
 		velocity = velocity.normalized() * DASH_SPEED
-		
+	else:
+		# Added this to remove a bug where the dash animation
+		#  would continue playing if you dashed and then sat still
+		match $AnimatedSprite2D.animation:
+			'dash_right':
+				$AnimatedSprite2D.play("right")
+			'dash_left':
+				$AnimatedSprite2D.play("left")
+	
 	#using delta ensures position remains consisten regardless of FPS, this updates player position
 	position += velocity * delta  
 	#preventing player from leaving the screen
