@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://mq4kgpqbqbsw"]
+[gd_scene load_steps=7 format=3 uid="uid://mq4kgpqbqbsw"]
 
 [ext_resource type="Script" path="res://scripts/light_bar.gd" id="1_stl32"]
 
@@ -9,6 +9,13 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abbff"]
 bg_color = Color(1, 0.992157, 0.709804, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5gow"]
+size = Vector2(540, 49)
+
+[sub_resource type="Environment" id="Environment_pb10u"]
+background_mode = 3
+glow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_stl32")
@@ -24,5 +31,17 @@ theme_override_styles/background = SubResource("StyleBoxFlat_dwd1n")
 theme_override_styles/fill = SubResource("StyleBoxFlat_abbff")
 value = 100.0
 show_percentage = false
+
+[node name="Area2D" type="Area2D" parent="."]
+modulate = Color(2, 2, 1, 1)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(320, 930)
+shape = SubResource("RectangleShape2D_u5gow")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pb10u")
 
 [connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]
