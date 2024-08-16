@@ -12,7 +12,7 @@ const BOTTOM_LEFT = PI/2
 
 # Godot Elements
 @export var light_scene: PackedScene
-@onready var light_level = $LightBarNode/LightBar
+@onready var glow_level = $LightBarNode/LightBar
 @onready var light_spawn_locs = $Orbs.get_children() # returns all children of $Orbs as a list
 
 # Global Variabels
@@ -31,7 +31,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	light_level.value -= 0.2
+	glow_level.value -= (50*delta)
+	print(delta)
+	#Matches float value of glow from bar to light energy value of firefly adequately
+	if glow_level.value != 0:
+		$FireflyPlayer/FireflyTailLight.energy = glow_level.value / 10
 
 func new_game():
 	score = 0
@@ -47,7 +51,7 @@ func _game_over(value):
 		print('Final Score:', score)
 
 func _on_firefly_player_light_contact():
-	light_level.value += 10
+	glow_level.value += 10
 	
 
 # Timer Methods

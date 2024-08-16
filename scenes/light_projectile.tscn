@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://sng1scnr7o3y"]
+[gd_scene load_steps=9 format=3 uid="uid://sng1scnr7o3y"]
 
 [ext_resource type="Script" path="res://scripts/light_projectile.gd" id="1_vhad8"]
 [ext_resource type="Texture2D" uid="uid://k5651fowvn66" path="res://assets/light-orb-Sheet.svg" id="2_ggthn"]
@@ -26,6 +26,16 @@ background_mode = 3
 glow_enabled = true
 glow_intensity = 0.5
 
+[sub_resource type="Gradient" id="Gradient_7tuo1"]
+offsets = PackedFloat32Array(0.0649351, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aofi0"]
+gradient = SubResource("Gradient_7tuo1")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.876147, 0.165138)
+
 [node name="LightProjectile" type="RigidBody2D" groups=["orbs"]]
 collision_mask = 0
 gravity_scale = 0.0
@@ -50,5 +60,10 @@ scale = Vector2(3.29609, 3.17813)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7ld50")
+
+[node name="ProjectileLight" type="PointLight2D" parent="."]
+scale = Vector2(1.375, 1.21875)
+energy = 1.2
+texture = SubResource("GradientTexture2D_aofi0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnlcsl0h4mgpy"]
+[gd_scene load_steps=6 format=3 uid="uid://dnlcsl0h4mgpy"]
 
 [ext_resource type="PackedScene" uid="uid://6orar16yxpcb" path="res://scenes/firefly_player.tscn" id="1_g661c"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_iwp0e"]
 [ext_resource type="PackedScene" uid="uid://sng1scnr7o3y" path="res://scenes/light_projectile.tscn" id="2_vrx3n"]
-[ext_resource type="PackedScene" uid="uid://10i7hn5l6bgi" path="res://ui.tscn" id="5_m1864"]
 [ext_resource type="PackedScene" uid="uid://bm7erg8awbr51" path="res://scenes/glow_bar.tscn" id="5_v25io"]
 
 [sub_resource type="Curve2D" id="Curve2D_lptqb"]
@@ -60,7 +59,8 @@ curve = SubResource("Curve2D_lptqb")
 
 [node name="LightSpawnLocation" type="PathFollow2D" parent="LightPath"]
 
-[node name="UI" parent="." instance=ExtResource("5_m1864")]
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.201527, 0.201527, 0.201527, 1)
 
 [connection signal="light_contact" from="FireflyPlayer" to="." method="_on_firefly_player_light_contact"]
 [connection signal="timeout" from="LightTimer" to="." method="_on_light_timer_timeout"]
