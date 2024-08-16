@@ -29,10 +29,16 @@ func _process(delta):
 	#Input.is_action_pressed returns TRUE if pressed and FALSE if not
 	if Input.is_action_pressed("move_right"):  
 		velocity.x += 1
-		$AnimatedSprite2D.play('right')
+		if dash:
+			$AnimatedSprite2D.play("dash_right")
+		else:
+			$AnimatedSprite2D.play('right')
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-		$AnimatedSprite2D.play('left')
+		if dash:
+			$AnimatedSprite2D.play("dash_left")
+		else:
+			$AnimatedSprite2D.play('left')
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 	if Input.is_action_pressed("move_down"):
@@ -47,10 +53,7 @@ func _process(delta):
 #normalizes veloctiy speed (sets vector length to 1) so moving diagonally doesnt make you go faster
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * firefly_speed  
-		 #$ is short for "get_node"... relative path
-		#$AnimatedSprite2D.play()     
-	else:
-		$AnimatedSprite2D.play('idle')
+	
 	
 	#Checks for dashing, if dashing gives dash speed
 	if dash:

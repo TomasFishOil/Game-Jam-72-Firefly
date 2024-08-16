@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dehg8k6r0ybmk"
-path="res://.godot/imported/FireflySpriteSheet..svg-2d883a69e99e8646a731166d366a8286.ctex"
+uid="uid://btmwt4rfyemih"
+path="res://.godot/imported/FireflyDashLeft.svg-3d6a0be0542cf58450ffc2daad459396.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/FireflySpriteSheet..svg"
-dest_files=["res://.godot/imported/FireflySpriteSheet..svg-2d883a69e99e8646a731166d366a8286.ctex"]
+source_file="res://assets/FireflyDashLeft.svg"
+dest_files=["res://.godot/imported/FireflyDashLeft.svg-3d6a0be0542cf58450ffc2daad459396.ctex"]
 
 [params]
 
