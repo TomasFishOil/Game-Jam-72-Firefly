@@ -112,6 +112,7 @@ func hori_line_attack(pos):
 
 
 # OLD CODE THAT WE MIGHT FIND USEFUL TO LOOK BACK ON, DEPRECATED
+"""
 func og_rand_attack():
 	# Creates new instance of the mob scene
 	var light_particle = light_scene.instantiate()
@@ -136,3 +137,4 @@ func og_rand_attack():
 	
 	# Spawn the light partile
 	add_child(light_particle)
+"""
