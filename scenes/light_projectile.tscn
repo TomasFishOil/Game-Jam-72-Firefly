@@ -24,8 +24,9 @@ radius = 16.0207
 [sub_resource type="Environment" id="Environment_7ld50"]
 background_mode = 3
 glow_enabled = true
+glow_intensity = 0.5
 
-[node name="LightProjectile" type="RigidBody2D"]
+[node name="LightProjectile" type="RigidBody2D" groups=["orbs"]]
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_vhad8")

@@ -125,7 +125,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"dash_left",
-"speed": 25.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -148,7 +148,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"dash_right",
-"speed": 25.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -214,7 +214,7 @@ script = ExtResource("1_2mb1i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5wdbi")
-animation = &"dash_right"
+animation = &"dash_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -222,7 +222,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dgpe4")
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.3
 
 [node name="DashCoolDown" type="Timer" parent="."]
 wait_time = 5.0

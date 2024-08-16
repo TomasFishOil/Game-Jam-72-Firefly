@@ -96,18 +96,19 @@ func _process(delta):
 	
 
 # Collision Function
-#green icon means the function doesn't exist, only that the signal will attempt to connect to a function with this name
+
 func _on_body_entered(body):
-	light_contact.emit()
-	body.queue_free()
-	dash_orb_count += 1
-	print(dash_orb_count)  #debuggin
-	#Dash cooldown refund on 10 orb collection
-	if dash_orb_count == 10:
-		dash_availible = true
-		$DashCoolDown.start()
-		dash_orb_count = 0
-		print('dash refunded!')
+	if body.is_in_group("orbs"):
+		light_contact.emit()
+		body.queue_free()
+		dash_orb_count += 1
+		print(dash_orb_count)  #debuggin
+		#Dash cooldown refund on 10 orb collection
+		if dash_orb_count == 10:
+			dash_availible = true
+			$DashCoolDown.start()
+			dash_orb_count = 0
+			print('dash refunded!')
 
 func start(pos):
 	position = pos

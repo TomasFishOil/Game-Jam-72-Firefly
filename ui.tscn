@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://10i7hn5l6bgi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_el5bc"]
+size = Vector2(432, 1008.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yoqk"]
+size = Vector2(865, 99)
+
+[node name="UI" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(986, 503.75)
+shape = SubResource("RectangleShape2D_el5bc")
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(432.5, 947.5)
+shape = SubResource("RectangleShape2D_6yoqk")
