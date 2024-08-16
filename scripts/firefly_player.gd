@@ -61,10 +61,10 @@ func _process(delta):
 		velocity.y += 1
 		if dash:
 			match $AnimatedSprite2D.animation:
-					'right':
-						$AnimatedSprite2D.play("dash_right")
-					'left':
-						$AnimatedSprite2D.play("dash_left")
+				'right':
+					$AnimatedSprite2D.play("dash_right")
+				'left':
+					$AnimatedSprite2D.play("dash_left")
 	
 	if Input.is_action_just_pressed("dash") and dash_availible:
 		dash = true

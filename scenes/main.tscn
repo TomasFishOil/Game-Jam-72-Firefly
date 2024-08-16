@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://6orar16yxpcb" path="res://scenes/firefly_player.tscn" id="1_g661c"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_iwp0e"]
 [ext_resource type="PackedScene" uid="uid://sng1scnr7o3y" path="res://scenes/light_projectile.tscn" id="2_vrx3n"]
-[ext_resource type="PackedScene" uid="uid://mq4kgpqbqbsw" path="res://scenes/light_bar.tscn" id="4_juvgx"]
+[ext_resource type="PackedScene" uid="uid://bm7erg8awbr51" path="res://scenes/glow_bar.tscn" id="5_v25io"]
 
 [sub_resource type="Curve2D" id="Curve2D_lptqb"]
 _data = {
@@ -23,7 +23,7 @@ wait_time = 0.5
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
-[node name="CanvasLayer" parent="." instance=ExtResource("4_juvgx")]
+[node name="LightBarNode" parent="." instance=ExtResource("5_v25io")]
 
 [node name="StartTimer" type="Timer" parent="."]
 one_shot = true
@@ -62,5 +62,5 @@ curve = SubResource("Curve2D_lptqb")
 [connection signal="light_contact" from="FireflyPlayer" to="." method="_on_firefly_player_light_contact"]
 [connection signal="timeout" from="LightTimer" to="." method="_on_light_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
-[connection signal="bar_level" from="CanvasLayer" to="." method="_game_over"]
+[connection signal="bar_level" from="LightBarNode" to="." method="_game_over"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

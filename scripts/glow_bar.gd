@@ -1,6 +1,6 @@
-extends CanvasLayer
+extends Node2D
 
-@onready var light_level = $ProgressBar
+@onready var light_level = $LightBar
 var count = 0
 signal bar_level
 
@@ -12,7 +12,5 @@ func _ready():
 func _process(delta):
 	pass
 
-
-func _on_progress_bar_value_changed(value):
-	# You can pass an infinite amount of parameters into emit
+func _on_light_bar_value_changed(value):
 	bar_level.emit(value)

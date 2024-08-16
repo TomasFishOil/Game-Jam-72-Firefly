@@ -12,7 +12,7 @@ const BOTTOM_LEFT = PI/2
 
 # Godot Elements
 @export var light_scene: PackedScene
-@onready var light_level = $CanvasLayer/ProgressBar
+@onready var light_level = $LightBarNode/LightBar
 @onready var light_spawn_locs = $Orbs.get_children() # returns all children of $Orbs as a list
 
 # Global Variabels
@@ -43,7 +43,7 @@ func _game_over(value):
 		$ScoreTimer.stop()
 		$LightTimer.stop()
 		$FireflyPlayer.queue_free()
-		$CanvasLayer/ProgressBar.hide()
+		$LightBarNode/LightBar.hide()
 		print('Final Score:', score)
 
 func _on_firefly_player_light_contact():
