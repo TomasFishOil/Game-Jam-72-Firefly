@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl4m4ibxcuswd"
-path="res://.godot/imported/FireflySheetLeft.png-a157fa40418fc187b31f626cc77e4c96.ctex"
+uid="uid://26yup363ft74"
+path="res://.godot/imported/FireflySheetLeft.svg-72a809e655a2306bfa5371c6aa5e8fb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/FireflySheetLeft.png"
-dest_files=["res://.godot/imported/FireflySheetLeft.png-a157fa40418fc187b31f626cc77e4c96.ctex"]
+source_file="res://assets/FireflySheetLeft.svg"
+dest_files=["res://.godot/imported/FireflySheetLeft.svg-72a809e655a2306bfa5371c6aa5e8fb0.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
