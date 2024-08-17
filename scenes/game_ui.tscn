@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgkwqmm3xbdtq"]
+[gd_scene load_steps=8 format=3 uid="uid://dgkwqmm3xbdtq"]
 
+[ext_resource type="Script" path="res://scripts/game_ui.gd" id="1_a46f3"]
 [ext_resource type="Texture2D" uid="uid://c2rfeia36a4tp" path="res://assets/dash-bar-over.svg" id="1_cmjtl"]
-[ext_resource type="Script" path="res://scenes/game_ui.gd" id="1_yhtvo"]
 [ext_resource type="FontFile" uid="uid://ing4mhn155jx" path="res://assets/dpcomic.ttf" id="3_ie21f"]
 [ext_resource type="Texture2D" uid="uid://bjv4nlbxpj7kd" path="res://assets/light-orb.svg" id="3_kxvye"]
+[ext_resource type="Texture2D" uid="uid://btpvn5lvpsqur" path="res://assets/BasicBackground.svg" id="5_buf3c"]
+
+[sub_resource type="Gradient" id="Gradient_nnmdd"]
+offsets = PackedFloat32Array(0, 0.961039)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3y717"]
+gradient = SubResource("Gradient_nnmdd")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.862385, 0.133028)
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -16,7 +27,7 @@ offset_right = -2.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_yhtvo")
+script = ExtResource("1_a46f3")
 
 [node name="DashNodes" type="Control" parent="."]
 z_index = 5
@@ -77,6 +88,7 @@ border_width = 5.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 4
+layout_mode = 0
 offset_left = -10.0
 offset_right = 384.0
 offset_bottom = 993.0
@@ -84,6 +96,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 z_index = 4
+layout_mode = 0
 offset_left = 1024.0
 offset_top = -2.0
 offset_right = 1602.0
@@ -117,5 +130,29 @@ offset_bottom = 237.0
 theme_override_fonts/font = ExtResource("3_ie21f")
 theme_override_font_sizes/font_size = 200
 text = "00:00"
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+visibility_layer = 16
+position = Vector2(703.5, 534)
+scale = Vector2(8.02678, 8.3875)
+texture = ExtResource("5_buf3c")
+
+[node name="LanternLight1" type="PointLight2D" parent="BackgroundSprite"]
+position = Vector2(-25.1035, -43.3979)
+scale = Vector2(0.71218, 0.699329)
+texture = SubResource("GradientTexture2D_3y717")
+
+[node name="LanternLight2" type="PointLight2D" parent="BackgroundSprite"]
+position = Vector2(35.0701, -40.4173)
+scale = Vector2(0.71218, 0.699329)
+texture = SubResource("GradientTexture2D_3y717")
+
+[node name="LanternLight3" type="PointLight2D" parent="BackgroundSprite"]
+position = Vector2(17.0056, -11.2071)
+scale = Vector2(0.71218, 0.699329)
+texture = SubResource("GradientTexture2D_3y717")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="BackgroundSprite"]
+color = Color(0.385493, 0.385492, 0.385492, 1)
 
 [connection signal="value_changed" from="DashNodes/DashBar" to="." method="_on_dash_bar_value_changed"]
