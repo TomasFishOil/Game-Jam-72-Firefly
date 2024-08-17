@@ -6,7 +6,8 @@ extends Area2D
 @export var dash_orb_count = 0
 
 #play area
-var screen_size  
+@export var screen_size_min = 0
+@export var screen_size_max = 0  
 
 #Dash variables
 var dash = false
@@ -20,7 +21,8 @@ signal light_contact
 #Called when the node enters the scene tree for the first time.
 func _ready():
 	#finds screen size 
-	screen_size = get_viewport_rect().size
+	screen_size_min = Vector2.ZERO 
+	screen_size_max = get_viewport_rect().size
 	$AnimatedSprite2D.play('right') 
 
 #Called every frame. 'delta' is the elapsed time since the previous frame. Good for updating elements in the game
@@ -92,7 +94,7 @@ func _process(delta):
 	#using delta ensures position remains consisten regardless of FPS, this updates player position
 	position += velocity * delta  
 	#preventing player from leaving the screen
-	position = position.clamp(Vector2.ZERO, screen_size)  
+	position = position.clamp(screen_size_min, screen_size_max)  
 	
 
 # Collision Function

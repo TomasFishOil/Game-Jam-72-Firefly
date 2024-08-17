@@ -31,8 +31,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	glow_level.value -= (50*delta)
-	print(delta)
+	glow_level.value -= (25*delta)
 	#Matches float value of glow from bar to light energy value of firefly adequately
 	if glow_level.value != 0:
 		$FireflyPlayer/FireflyTailLight.energy = glow_level.value / 10
@@ -40,6 +39,8 @@ func _process(delta):
 func new_game():
 	score = 0
 	$FireflyPlayer.start($StartPosition.position)
+	$FireflyPlayer.screen_size_min = $MovementBorderStart.position
+	$FireflyPlayer.screen_size_max = $MovementBorder.get_rect().size + $MovementBorderStart.position
 	$StartTimer.start()
 
 func _game_over(value):

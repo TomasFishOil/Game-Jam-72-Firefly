@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var glow_level = $LightBar
-
 var count = 0
 signal bar_level
 

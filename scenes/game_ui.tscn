@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dgkwqmm3xbdtq"]
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MovementBorder" type="ReferenceRect" parent="."]
+layout_mode = 0
+offset_left = 383.0
+offset_right = 1023.0
+offset_bottom = 990.0
+border_width = 5.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 1260.0
+offset_top = 174.0
+offset_right = 1300.0
+offset_bottom = 214.0
+value = 50.0
+fill_mode = 4
