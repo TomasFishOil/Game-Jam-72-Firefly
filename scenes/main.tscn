@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnlcsl0h4mgpy"]
+[gd_scene load_steps=6 format=3 uid="uid://dnlcsl0h4mgpy"]
 
 [ext_resource type="PackedScene" uid="uid://6orar16yxpcb" path="res://scenes/firefly_player.tscn" id="1_g661c"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_iwp0e"]
 [ext_resource type="PackedScene" uid="uid://sng1scnr7o3y" path="res://scenes/light_projectile.tscn" id="2_vrx3n"]
+[ext_resource type="PackedScene" uid="uid://dgkwqmm3xbdtq" path="res://scenes/game_ui.tscn" id="5_ruomu"]
 [ext_resource type="PackedScene" uid="uid://bm7erg8awbr51" path="res://scenes/glow_bar.tscn" id="5_v25io"]
 
 [node name="main" type="Node"]
@@ -13,6 +14,7 @@ light_scene = ExtResource("2_vrx3n")
 position = Vector2(3, 11)
 
 [node name="LightBarNode" parent="." instance=ExtResource("5_v25io")]
+z_index = 5
 position = Vector2(384, 3)
 
 [node name="LightTimer" type="Timer" parent="."]
@@ -49,29 +51,14 @@ position = Vector2(900, 226)
 [node name="LightSpawn7" type="Marker2D" parent="Orbs"]
 position = Vector2(538, 761)
 
-[node name="MovementBorder" type="ReferenceRect" parent="."]
-offset_left = 381.0
-offset_top = 4.0
-offset_right = 1021.0
-offset_bottom = 994.0
+[node name="GameUI" parent="." instance=ExtResource("5_ruomu")]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="MovementBorderStart" type="Marker2D" parent="."]
 position = Vector2(384, 0)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = 10
-offset_left = -10.0
-offset_right = 384.0
-offset_bottom = 993.0
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-z_index = 10
-offset_left = 1024.0
-offset_top = -2.0
-offset_right = 1602.0
-offset_bottom = 993.0
-color = Color(0, 0, 0, 1)
 
 [connection signal="light_contact" from="FireflyPlayer" to="." method="_on_firefly_player_light_contact"]
 [connection signal="bar_level" from="LightBarNode" to="." method="_game_over"]

@@ -1,11 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://sng1scnr7o3y"]
+[gd_scene load_steps=14 format=3 uid="uid://sng1scnr7o3y"]
 
 [ext_resource type="Script" path="res://scripts/light_projectile.gd" id="1_vhad8"]
 [ext_resource type="Texture2D" uid="uid://k5651fowvn66" path="res://assets/light-orb-Sheet.svg" id="2_ggthn"]
+[ext_resource type="Texture2D" uid="uid://8j34j1we28q" path="res://assets/light-orb-animation.svg" id="3_wbk1k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npx1o"]
 atlas = ExtResource("2_ggthn")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtqk2"]
+atlas = ExtResource("3_wbk1k")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrxa4"]
+atlas = ExtResource("3_wbk1k")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kgl5"]
+atlas = ExtResource("3_wbk1k")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu2od"]
+atlas = ExtResource("3_wbk1k")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_in1hu"]
 animations = [{
@@ -15,6 +32,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtqk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrxa4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kgl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu2od")
+}],
+"loop": true,
+"name": &"pulse",
 "speed": 10.0
 }]
 
@@ -45,8 +79,8 @@ script = ExtResource("1_vhad8")
 modulate = Color(2, 2, 1, 1)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_in1hu")
-animation = &"idle"
-frame_progress = 0.221365
+animation = &"pulse"
+frame_progress = 0.705283
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.187493, -3.52859e-05)

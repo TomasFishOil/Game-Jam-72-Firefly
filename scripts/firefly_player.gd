@@ -4,6 +4,7 @@ extends Area2D
 #changing speed in the inspector will cause the speed in the script to be overriden
 @export var firefly_speed = 400  
 @export var dash_orb_count = 0
+@export var total_orb_count = 0
 
 #play area
 @export var screen_size_min = 0
@@ -104,6 +105,7 @@ func _on_body_entered(body):
 		light_contact.emit()
 		body.queue_free()
 		dash_orb_count += 1
+		total_orb_count += 1
 		print(dash_orb_count)  #debuggin
 		#Dash cooldown refund on 10 orb collection
 		if dash_orb_count == 10:
@@ -122,4 +124,5 @@ func _on_dash_timer_timeout():
 
 func _on_dash_cool_down_timeout():
 	dash_availible = true
+	dash_orb_count = 0
 	print("dash availible")

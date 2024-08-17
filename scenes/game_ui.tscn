@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://dgkwqmm3xbdtq"]
+[gd_scene load_steps=5 format=3 uid="uid://dgkwqmm3xbdtq"]
+
+[ext_resource type="Texture2D" uid="uid://c2rfeia36a4tp" path="res://assets/dash-bar-over.svg" id="1_cmjtl"]
+[ext_resource type="Script" path="res://scenes/game_ui.gd" id="1_yhtvo"]
+[ext_resource type="FontFile" uid="uid://ing4mhn155jx" path="res://assets/dpcomic.ttf" id="3_ie21f"]
+[ext_resource type="Texture2D" uid="uid://bjv4nlbxpj7kd" path="res://assets/light-orb.svg" id="3_kxvye"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -11,6 +16,57 @@ offset_right = -2.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_yhtvo")
+
+[node name="DashNodes" type="Control" parent="."]
+z_index = 5
+anchors_preset = 0
+offset_left = 383.0
+offset_right = 423.0
+offset_bottom = 40.0
+
+[node name="DashBar" type="TextureProgressBar" parent="DashNodes"]
+z_index = 5
+layout_mode = 0
+offset_left = 982.0
+offset_top = 281.0
+offset_right = 1046.0
+offset_bottom = 345.0
+scale = Vector2(3, 3)
+value = 100.0
+fill_mode = 5
+texture_progress = ExtResource("1_cmjtl")
+
+[node name="DashText" type="Label" parent="DashNodes"]
+z_index = 5
+layout_mode = 0
+offset_left = 685.0
+offset_top = 345.0
+offset_right = 978.0
+offset_bottom = 405.0
+theme_override_fonts/font = ExtResource("3_ie21f")
+theme_override_font_sizes/font_size = 60
+text = "Dash Timer:"
+
+[node name="ResetText" type="Label" parent="DashNodes"]
+layout_mode = 0
+offset_left = 684.0
+offset_top = 530.0
+offset_right = 1048.0
+offset_bottom = 585.0
+theme_override_fonts/font = ExtResource("3_ie21f")
+theme_override_font_sizes/font_size = 60
+text = "Orbs Until Reset:"
+
+[node name="ResetOrbText" type="Label" parent="DashNodes"]
+layout_mode = 0
+offset_left = 1070.0
+offset_top = 532.0
+offset_right = 1124.0
+offset_bottom = 587.0
+theme_override_fonts/font = ExtResource("3_ie21f")
+theme_override_font_sizes/font_size = 60
+text = "10"
 
 [node name="MovementBorder" type="ReferenceRect" parent="."]
 layout_mode = 0
@@ -19,11 +75,47 @@ offset_right = 1023.0
 offset_bottom = 990.0
 border_width = 5.0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 4
+offset_left = -10.0
+offset_right = 384.0
+offset_bottom = 993.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 4
+offset_left = 1024.0
+offset_top = -2.0
+offset_right = 1602.0
+offset_bottom = 993.0
+color = Color(0, 0, 0, 1)
+
+[node name="OrbCount" type="Label" parent="."]
+z_index = 5
 layout_mode = 0
-offset_left = 1260.0
-offset_top = 174.0
-offset_right = 1300.0
-offset_bottom = 214.0
-value = 50.0
-fill_mode = 4
+offset_left = 1215.0
+offset_top = 667.528
+offset_right = 1546.0
+offset_bottom = 777.528
+theme_override_fonts/font = ExtResource("3_ie21f")
+theme_override_font_sizes/font_size = 120
+text = "0"
+
+[node name="OrbSprite" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(1130, 716.528)
+scale = Vector2(3, 3.079)
+texture = ExtResource("3_kxvye")
+
+[node name="GameTimer" type="Label" parent="."]
+z_index = 5
+layout_mode = 0
+offset_left = 1111.0
+offset_top = 56.0
+offset_right = 1514.0
+offset_bottom = 237.0
+theme_override_fonts/font = ExtResource("3_ie21f")
+theme_override_font_sizes/font_size = 200
+text = "00:00"
+
+[connection signal="value_changed" from="DashNodes/DashBar" to="." method="_on_dash_bar_value_changed"]

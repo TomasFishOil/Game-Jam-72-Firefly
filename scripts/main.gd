@@ -13,25 +13,35 @@ const BOTTOM_LEFT = PI/2
 # Godot Elements
 @export var light_scene: PackedScene
 @onready var glow_level = $LightBarNode/LightBar
+@onready var dash_bar = $GameUI/DashNodes/DashBar
+@onready var game_timer = $GameUI/GameTimer
 @onready var light_spawn_locs = $Orbs.get_children() # returns all children of $Orbs as a list
 
 # Global Variabels
 var score: int
 # stores attack functions as callable functions, meaning you can use .call() as if you were just using ()
-var boss_attacks: Array[Callable] = [x_attack, ball_attack, vert_line_attack, hori_line_attack] 
+var boss_attacks: Array[Callable] = [x_attack, plus_attack, ball_attack, vert_line_attack, hori_line_attack] 
 var orb_speed: Vector2 = Vector2(200, 200)
 var orb_spawn_speed: float = 0.25
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$LightTimer.start()
-	$LightTimer.wait_time = 3
+	$StartTimer.start()
+	$ScoreTimer.start()
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	glow_level.value -= (25*delta)
+	$GameUI/OrbCount.text = str($FireflyPlayer.total_orb_count)
+	$GameUI/DashNodes/ResetOrbText.text = str(10 - $FireflyPlayer.dash_orb_count)
+	
+	if $FireflyPlayer and not $FireflyPlayer.dash_availible:
+		dash_bar.value = $FireflyPlayer/DashCoolDown.time_left * 20
+	else:
+		dash_bar.value = 100
+		
 	#Matches float value of glow from bar to light energy value of firefly adequately
 	if glow_level.value != 0:
 		$FireflyPlayer/FireflyTailLight.energy = glow_level.value / 10
@@ -40,27 +50,49 @@ func new_game():
 	score = 0
 	$FireflyPlayer.start($StartPosition.position)
 	$FireflyPlayer.screen_size_min = $MovementBorderStart.position
-	$FireflyPlayer.screen_size_max = $MovementBorder.get_rect().size + $MovementBorderStart.position
-	$StartTimer.start()
+	$FireflyPlayer.screen_size_max = $GameUI/MovementBorder.get_rect().size + $MovementBorderStart.position
+	
+	$LightTimer.start()
+	$LightTimer.wait_time = 3
 
 func _game_over(value):
 	if value == 0:
 		$ScoreTimer.stop()
 		$LightTimer.stop()
-		$FireflyPlayer.queue_free()
+		$FireflyPlayer.hide()
+		$GameUI/DashNodes/DashBar.hide()
 		$LightBarNode/LightBar.hide()
 		print('Final Score:', score)
 
+# Firefly Related Signals
 func _on_firefly_player_light_contact():
 	glow_level.value += 10
-	
 
 # Timer Methods
 func _on_score_timer_timeout():
 	score += 1
+	
+	var timer = game_timer.text.split(':')
+	var minutes: int = int(timer[0])
+	var seconds: int = int(timer[1])
+	
+	if seconds < 59:
+		seconds += 1
+	else:
+		seconds = 0
+		minutes += 1
+	
+	var seconds_str: String = '0'
+	var minutes_str: String = '0'
+	if seconds >= 10:
+		seconds_str = ''
+	if minutes >= 10:
+		minutes_str = ''
+
+	game_timer.text = minutes_str + str(minutes) + ':' + seconds_str + str(seconds)
 
 func _on_start_timer_timeout():
-	$ScoreTimer.start()
+	pass
 
 func _on_light_timer_timeout():
 	# Choses a random index from all light spawns, then calls .position on them to get (x, y) coord
@@ -93,6 +125,16 @@ func x_attack(pos):
 	for x in 5:
 		# Basically a for-each loop but in gdscript (python) syntax
 		for direction in [TOP_RIGHT, TOP_LEFT, BOTTOM_LEFT, BOTTOM_RIGHT]:
+			create_light_orb(direction, pos)
+		
+		# Creates a temporary timer in the current session
+		#  that pauses this method for 0.5 seconds
+		await get_tree().create_timer(orb_spawn_speed).timeout
+
+func plus_attack(pos):
+	for x in 5:
+		# Basically a for-each loop but in gdscript (python) syntax
+		for direction in [UP, DOWN, LEFT, RIGHT]:
 			create_light_orb(direction, pos)
 		
 		# Creates a temporary timer in the current session
