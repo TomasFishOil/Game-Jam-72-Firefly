@@ -10,7 +10,7 @@
 script = ExtResource("1_iwp0e")
 light_scene = ExtResource("2_vrx3n")
 
-[node name="GameUI" parent="." groups=["main_ui"] instance=ExtResource("5_ruomu")]
+[node name="GameUI" parent="." instance=ExtResource("5_ruomu")]
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0

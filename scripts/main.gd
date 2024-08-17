@@ -16,6 +16,7 @@ const BOTTOM_LEFT = PI/2
 @onready var dash_bar = $GameUI/DashNodes/DashBar
 @onready var game_timer = $GameUI/GameTimer
 @onready var light_spawn_locs = $Orbs.get_children() # returns all children of $Orbs as a list
+@onready var timer_list = [$LightTimer, $ScoreTimer, $StartTimer, $FireflyPlayer/DashTimer]
 
 # Global Variabels
 var score: int
@@ -24,16 +25,45 @@ var boss_attacks: Array[Callable] = [x_attack, plus_attack, ball_attack, vert_li
 var orb_speed: Vector2 = Vector2(200, 200)
 var orb_spawn_speed: float = 0.25
 
+# Pause Variables
+var game_paused = false
+var orb_velocity_dict: Dictionary = {}
+var orb_stop_timer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$StartTimer.start()
 	$ScoreTimer.start()
+	orb_stop_timer = get_tree().create_timer(99999)
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	glow_level.value -= (25*delta)
+	# Pause Game
+	if Input.is_action_just_pressed("ui_cancel"):
+		print(get_tree())
+		
+		if game_paused: # unpause
+			$FireflyPlayer/AnimatedSprite2D.play()
+			for timer in timer_list:
+				timer.paused = false
+				game_paused = false
+		else: # pause
+			$FireflyPlayer/AnimatedSprite2D.pause()
+			for timer in timer_list:
+				timer.paused = true
+				game_paused = true
+		$FireflyPlayer.paused = game_paused
+		pause_orbs(game_paused)
+		orb_stop_timer.set_time_left(0)
+		print(orb_stop_timer.time_left)
+		
+	
+	
+	#if not game_paused:
+	#glow_level.value -= (25*delta)
+	glow_level.value -= 0.01
 	$GameUI/OrbCount.text = str($FireflyPlayer.total_orb_count)
 	$GameUI/DashNodes/ResetOrbText.text = str(10 - $FireflyPlayer.dash_orb_count)
 	
@@ -45,6 +75,17 @@ func _process(delta):
 	#Matches float value of glow from bar to light energy value of firefly adequately
 	if glow_level.value != 0:
 		$FireflyPlayer/FireflyTailLight.energy = glow_level.value / 10
+
+func pause_orbs(state: bool):
+	for child in get_children():
+		var orb_animated_sprite = child.find_child('AnimatedSprite2D')
+		if child is RigidBody2D and orb_animated_sprite.animation == 'pulse':
+			if game_paused:
+				orb_velocity_dict[str(child.name)] = child.linear_velocity
+			child.sleeping = state
+			if not game_paused:
+				if child.name in orb_velocity_dict.keys():
+					child.linear_velocity = orb_velocity_dict[str(child.name)]
 
 func new_game():
 	score = 0
@@ -110,6 +151,9 @@ func _on_light_timer_timeout():
 # Boss Attacks!
 # Creates a singular light orb, method created to reduce reptitive code
 func create_light_orb(direction, pos):
+	#if game_paused:
+		#await orb_stop_timer.timeout
+		
 	# Create light particle from global variable packed scene (look above)
 	var light_particle = light_scene.instantiate()
 	light_particle.position = pos # Sets position to pos, a randomized marker
