@@ -79,6 +79,7 @@ func _process(delta):
 			$DashSound.play()
 			print("DASH")   #Debugging
 			
+
 		#normalizes veloctiy speed (sets vector length to 1) so moving diagonally doesnt make you go faster
 		if velocity.length() > 0:
 			velocity = velocity.normalized() * firefly_speed  

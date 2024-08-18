@@ -42,3 +42,4 @@ func _on_controls_button_focus_entered():
 func _on_return_button_focus_entered():
 	lantern_select.position = select_locs[2].position
 
+

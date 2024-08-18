@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bm7erg8awbr51"]
+[gd_scene load_steps=10 format=3 uid="uid://bm7erg8awbr51"]
 
 [ext_resource type="Script" path="res://scripts/glow_bar.gd" id="1_p5vo1"]
+[ext_resource type="FontFile" uid="uid://ing4mhn155jx" path="res://assets/dpcomic.ttf" id="2_wkd57"]
 
 [sub_resource type="Theme" id="Theme_e21ja"]
 
@@ -29,6 +30,9 @@ fill = 2
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.752294, 0.084686)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gx71o"]
+light_mode = 1
+
 [node name="LightBarNode" type="Node2D"]
 script = ExtResource("1_p5vo1")
 
@@ -54,5 +58,15 @@ scale = Vector2(1.59, 1.58461)
 color = Color(1, 1, 0.745098, 1)
 energy = 2.0
 texture = SubResource("GradientTexture2D_wfuaj")
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("CanvasItemMaterial_gx71o")
+offset_left = 50.0
+offset_top = 872.0
+offset_right = 178.0
+offset_bottom = 900.0
+theme_override_fonts/font = ExtResource("2_wkd57")
+theme_override_font_sizes/font_size = 30
+text = "Light Level:"
 
 [connection signal="value_changed" from="LightBar" to="." method="_on_light_bar_value_changed"]

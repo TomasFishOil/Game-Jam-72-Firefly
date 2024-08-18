@@ -115,6 +115,7 @@ texture = SubResource("GradientTexture2D_nfrko")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(-1, 4)
 
+[connection signal="tree_entered" from="ButtonContainer" to="." method="_on_button_container_tree_entered"]
 [connection signal="focus_entered" from="ButtonContainer/ResumeButton" to="." method="_on_resume_button_focus_entered"]
 [connection signal="mouse_entered" from="ButtonContainer/ResumeButton" to="." method="_on_resume_button_mouse_entered"]
 [connection signal="pressed" from="ButtonContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

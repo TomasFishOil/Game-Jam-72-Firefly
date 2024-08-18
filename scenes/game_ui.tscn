@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgkwqmm3xbdtq"]
+[gd_scene load_steps=14 format=3 uid="uid://dgkwqmm3xbdtq"]
 
 [ext_resource type="Script" path="res://scripts/game_ui.gd" id="1_a46f3"]
 [ext_resource type="Texture2D" uid="uid://c2rfeia36a4tp" path="res://assets/dash-bar-over.svg" id="1_cmjtl"]
@@ -22,6 +22,8 @@ fill_to = Vector2(0.954128, 0.12844)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_n46qe"]
 gradient = SubResource("Gradient_f1mrg")
 fill_to = Vector2(0.059633, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_slmmw"]
 
 [sub_resource type="Gradient" id="Gradient_ixmrl"]
 offsets = PackedFloat32Array(0, 0.545455)
@@ -170,6 +172,7 @@ texture = SubResource("GradientTexture2D_n46qe")
 
 [node name="Ui-background2" type="Sprite2D" parent="."]
 z_index = 4
+material = SubResource("CanvasItemMaterial_slmmw")
 position = Vector2(1535, 647)
 scale = Vector2(4, 4)
 texture = ExtResource("6_pci8m")
