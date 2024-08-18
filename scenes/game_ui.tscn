@@ -152,7 +152,4 @@ position = Vector2(17.0056, -11.2071)
 scale = Vector2(0.71218, 0.699329)
 texture = SubResource("GradientTexture2D_3y717")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="BackgroundSprite"]
-color = Color(0.385493, 0.385492, 0.385492, 1)
-
 [connection signal="value_changed" from="DashNodes/DashBar" to="." method="_on_dash_bar_value_changed"]
