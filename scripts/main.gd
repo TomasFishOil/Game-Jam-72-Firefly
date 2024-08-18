@@ -24,6 +24,8 @@ var score: int
 var boss_attacks: Array[Callable] = [x_attack, plus_attack, ball_attack, vert_line_attack, hori_line_attack] 
 var orb_speed: Vector2 = Vector2(200, 200)
 var orb_spawn_speed: float = 0.25
+var total_minutes
+var total_seconds
 
 # Pause Variables
 var game_paused = true
@@ -35,15 +37,17 @@ func _ready():
 	for child in get_children():
 		child.process_mode = Node.PROCESS_MODE_PAUSABLE
 	$PauseMenu.process_mode = Node.PROCESS_MODE_ALWAYS
-	new_game()
-
-func _start_button_clicked():
+	$GameOver.process_mode = Node.PROCESS_MODE_ALWAYS
 	new_game()
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().paused = not get_tree().paused
 		$PauseMenu.visible = get_tree().paused
+		$PauseMenu/ButtonContainer/ResumeButton.grab_focus()
+
+func _start_button_clicked():
+	new_game()
 
 func _on_pause_menu_resume_game():
 	get_tree().paused = not get_tree().paused
@@ -51,6 +55,53 @@ func _on_pause_menu_resume_game():
 	
 func _on_pause_menu_exit_game():
 	get_tree().paused = not get_tree().paused
+	
+func new_game():
+	game_paused = false
+	$StartTimer.start()
+	$ScoreTimer.start()
+	
+	score = 0
+	$FireflyPlayer.start($StartPosition.position)
+	$FireflyPlayer.screen_size_min = $MovementBorderStart.position
+	$FireflyPlayer.screen_size_max = $GameUI/MovementBorder.get_rect().size + $MovementBorderStart.position
+	
+	$LightTimer.start()
+	$LightTimer.wait_time = 3
+
+func _game_over(value):
+	if value == 0:
+		$ScoreTimer.stop()
+		$LightTimer.stop()
+		$FireflyPlayer.hide()
+		$FireflyPlayer.position = Vector2.ZERO
+		$GameUI/DashNodes/DashBar.hide()
+		$LightBarNode/LightBar.hide()
+		change_visibility(false)
+		clear_orbs()
+		$GameOver/ButtonContainer/RetryButton.grab_focus()
+		$GameOver.visible = true
+		edit_game_over_text()
+		
+
+func edit_game_over_text():
+	$GameOver/GameTimeText.text = 'Game Time: ' + total_minutes + ':' + total_seconds
+	$GameOver/OrbCountText.text = 'Orbs Collected: ' + str($FireflyPlayer.total_orb_count)
+
+func change_visibility(status):
+	for child in get_children():
+		if child is Timer:
+			pass
+		else:
+			child.visible = status
+
+func clear_orbs():
+	for child in get_children():
+		var orb_animated_sprite = child.find_child('AnimatedSprite2D')
+		if child is RigidBody2D and orb_animated_sprite.animation == 'pulse':
+			#var orb_pos = child.position
+			#if orb_pos < $FireflyPlayer.screen_size_min or orb_pos > $FireflyPlayer.screen_size_max:
+			child.queue_free()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -81,29 +132,6 @@ func _process(delta):
 			light.energy = glow_level.value / 125
 
 
-func new_game():
-	game_paused = false
-	$StartTimer.start()
-	$ScoreTimer.start()
-	
-	score = 0
-	$FireflyPlayer.start($StartPosition.position)
-	$FireflyPlayer.screen_size_min = $MovementBorderStart.position
-	$FireflyPlayer.screen_size_max = $GameUI/MovementBorder.get_rect().size + $MovementBorderStart.position
-	
-	$LightTimer.start()
-	$LightTimer.wait_time = 3
-
-func _game_over(value):
-	if value == 0:
-		$ScoreTimer.stop()
-		$LightTimer.stop()
-		$FireflyPlayer.hide()
-		$FireflyPlayer.position = Vector2.ZERO
-		$GameUI/DashNodes/DashBar.hide()
-		$LightBarNode/LightBar.hide()
-		print('Final Score:', score)
-
 # Firefly Related Signals
 func _on_firefly_player_light_contact():
 	glow_level.value += 10
@@ -128,7 +156,9 @@ func _on_score_timer_timeout():
 		seconds_str = ''
 	if minutes >= 10:
 		minutes_str = ''
-
+	
+	total_minutes = minutes_str + str(minutes)
+	total_seconds = seconds_str + str(seconds)
 	game_timer.text = minutes_str + str(minutes) + ':' + seconds_str + str(seconds)
 
 func _on_light_timer_timeout():

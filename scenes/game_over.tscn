@@ -1,4 +1,30 @@
-[gd_scene format=3 uid="uid://c85v54msnekqr"]
+[gd_scene load_steps=11 format=3 uid="uid://qul03bc3in30"]
+
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_1nc1p"]
+[ext_resource type="FontFile" uid="uid://ing4mhn155jx" path="res://assets/dpcomic.ttf" id="1_e7o8n"]
+[ext_resource type="Texture2D" uid="uid://btpvn5lvpsqur" path="res://assets/BasicBackground.svg" id="2_xjahp"]
+[ext_resource type="Texture2D" uid="uid://blmqdiyuvdql" path="res://assets/simple-lantern.svg" id="3_7nv6e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vx1b8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyduu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2eki2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw2pq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Gradient" id="Gradient_uqqcb"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vkh6s"]
+gradient = SubResource("Gradient_uqqcb")
+fill = 1
+fill_from = Vector2(0.509174, 0.495413)
+fill_to = Vector2(0.715596, 0.770642)
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -7,3 +33,105 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1nc1p")
+
+[node name="GameOverText" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 369.0
+offset_top = 284.0
+offset_right = 1267.0
+offset_bottom = 469.0
+theme_override_fonts/font = ExtResource("1_e7o8n")
+theme_override_font_sizes/font_size = 100
+text = "As your light fades, the lanterns run dim...."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="GameTimeText" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 562.0
+offset_top = 530.0
+offset_right = 1005.0
+offset_bottom = 590.0
+theme_override_fonts/font = ExtResource("1_e7o8n")
+theme_override_font_sizes/font_size = 65
+text = "Game Time: 00:00"
+
+[node name="OrbCountText" type="Label" parent="."]
+z_index = 6
+offset_left = 562.0
+offset_top = 617.0
+offset_right = 1005.0
+offset_bottom = 677.0
+theme_override_fonts/font = ExtResource("1_e7o8n")
+theme_override_font_sizes/font_size = 65
+text = "Orbs Collected: 0"
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 638.0
+offset_top = 745.0
+offset_right = 949.0
+offset_bottom = 895.0
+
+[node name="RetryButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
+theme_override_fonts/font = ExtResource("1_e7o8n")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_vx1b8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hyduu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2eki2")
+theme_override_styles/focus = SubResource("StyleBoxFlat_vw2pq")
+text = "Retry"
+
+[node name="MainMenuButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
+theme_override_fonts/font = ExtResource("1_e7o8n")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_vx1b8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hyduu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2eki2")
+theme_override_styles/focus = SubResource("StyleBoxFlat_vw2pq")
+text = "Main Menu"
+
+[node name="ButtonSelect" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(-198, 42.0001)
+scale = Vector2(5, 5)
+texture = ExtResource("3_7nv6e")
+
+[node name="RetryLoc" type="Marker2D" parent="."]
+position = Vector2(915, 771)
+
+[node name="MainMenuLoc" type="Marker2D" parent="."]
+position = Vector2(987, 848)
+
+[node name="BasicBackground" type="Sprite2D" parent="."]
+position = Vector2(783, 970)
+scale = Vector2(20.75, 18.8)
+texture = ExtResource("2_xjahp")
+
+[node name="TitleLight" type="PointLight2D" parent="."]
+position = Vector2(785, 558)
+scale = Vector2(13.9174, 13.5667)
+texture = SubResource("GradientTexture2D_vkh6s")
+texture_scale = 1.95
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.0646965, 0.0646966, 0.0646965, 1)
+
+[connection signal="focus_entered" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_focus_entered"]
+[connection signal="mouse_entered" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_mouse_entered"]
+[connection signal="pressed" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="focus_entered" from="ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_focus_entered"]
+[connection signal="mouse_entered" from="ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_mouse_entered"]
+[connection signal="pressed" from="ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

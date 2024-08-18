@@ -19,11 +19,11 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogmgq"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="Gradient" id="Gradient_6r2xh"]
+[sub_resource type="Gradient" id="Gradient_c4tcs"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_j12g7"]
-gradient = SubResource("Gradient_6r2xh")
+gradient = SubResource("Gradient_c4tcs")
 fill = 1
 fill_from = Vector2(0.509174, 0.495413)
 fill_to = Vector2(0.715596, 0.770642)
@@ -133,7 +133,7 @@ texture = SubResource("GradientTexture2D_j12g7")
 texture_scale = 1.95
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.415981, 0.41598, 0.41598, 1)
+color = Color(0.415686, 0.415686, 0.415686, 1)
 
 [connection signal="focus_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
