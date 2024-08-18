@@ -26,17 +26,34 @@ var orb_speed: Vector2 = Vector2(200, 200)
 var orb_spawn_speed: float = 0.25
 
 # Pause Variables
-var game_paused = false
+var game_paused = true
 var orb_velocity_dict: Dictionary = {}
-
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	node_visibility(false)
+
+func node_visibility(status):
+	for node in get_children().slice(1):
+		if node is CanvasItem:
+			node.set_visible(status)
+
+func _start_button_clicked():
+	$MainMenu.queue_free()
+	node_visibility(true)
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# Removes orbs off of player screen
+	for child in get_children():
+		var orb_animated_sprite = child.find_child('AnimatedSprite2D')
+		if child is RigidBody2D and orb_animated_sprite.animation == 'pulse':
+			var orb_pos = child.position
+			if orb_pos < $FireflyPlayer.screen_size_min or orb_pos > $FireflyPlayer.screen_size_max:
+				child.queue_free()
+	
 	# Pause Game
 	if Input.is_action_just_pressed("ui_cancel"):
 		if game_paused: # unpause
@@ -85,6 +102,7 @@ func pause_orbs(state: bool):
 					child.linear_velocity = orb_velocity_dict[str(child.name)]
 
 func new_game():
+	game_paused = false
 	$StartTimer.start()
 	$ScoreTimer.start()
 	

@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://ing4mhn155jx" path="res://assets/dpcomic.ttf" id="1_nvtb0"]
 [ext_resource type="Script" path="res://main_menu.gd" id="1_piyy4"]
 [ext_resource type="Texture2D" uid="uid://btpvn5lvpsqur" path="res://assets/BasicBackground.svg" id="2_gqe34"]
-[ext_resource type="Texture2D" path="res://assets/simple-lantern.svg" id="3_h63gu"]
+[ext_resource type="Texture2D" uid="uid://blmqdiyuvdql" path="res://assets/simple-lantern.svg" id="3_h63gu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbq1t"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -129,5 +129,6 @@ texture_scale = 1.95
 color = Color(0.548963, 0.548963, 0.548963, 1)
 
 [connection signal="mouse_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="mouse_entered" from="VBoxContainer/ControlsButton" to="." method="_on_controls_button_mouse_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
