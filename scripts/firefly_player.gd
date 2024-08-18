@@ -76,6 +76,7 @@ func _process(delta):
 			dash_availible = false
 			$DashTimer.start()
 			$DashCoolDown.start()
+			$DashSound.play()
 			print("DASH")   #Debugging
 			
 		#normalizes veloctiy speed (sets vector length to 1) so moving diagonally doesnt make you go faster
@@ -108,6 +109,7 @@ func _on_body_entered(body):
 		body.queue_free()
 		dash_orb_count += 1
 		total_orb_count += 1
+		$OrbAbsorb.play()
 		print(dash_orb_count)  #debuggin
 		#Dash cooldown refund on 10 orb collection
 		if dash_orb_count == 10:

@@ -64,7 +64,8 @@ offset_bottom = 756.0
 z_index = 5
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
 theme_override_fonts/font = ExtResource("1_nvtb0")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_mbq1t")
@@ -77,7 +78,8 @@ text = "Start"
 z_index = 5
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
 theme_override_fonts/font = ExtResource("1_nvtb0")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_mbq1t")
@@ -90,7 +92,8 @@ text = "Controls"
 z_index = 5
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
 theme_override_fonts/font = ExtResource("1_nvtb0")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_mbq1t")
@@ -132,7 +135,10 @@ texture_scale = 1.95
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.548963, 0.548963, 0.548963, 1)
 
+[connection signal="focus_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/ControlsButton" to="." method="_on_controls_button_focus_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/ControlsButton" to="." method="_on_controls_button_mouse_entered"]
+[connection signal="focus_entered" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_focus_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_mouse_entered"]

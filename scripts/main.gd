@@ -31,19 +31,19 @@ var game_paused = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	node_visibility(false)
+	#node_visibility(false)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	for child in get_children():
 		child.process_mode = Node.PROCESS_MODE_PAUSABLE
-
-func node_visibility(status):
-	for node in get_children().slice(1):
-		if node is CanvasItem:
-			node.set_visible(status)
+	new_game()
+#func node_visibility(status):
+	#for node in get_children().slice(1):
+		#if node is CanvasItem:
+			#node.set_visible(status)
 
 func _start_button_clicked():
-	$MainMenu.queue_free()
-	node_visibility(true)
+	#$MainMenu.queue_free()
+	#node_visibility(true)
 	new_game()
 
 func _input(event):

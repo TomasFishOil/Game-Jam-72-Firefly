@@ -1,10 +1,12 @@
-[gd_scene load_steps=34 format=3 uid="uid://6orar16yxpcb"]
+[gd_scene load_steps=36 format=3 uid="uid://6orar16yxpcb"]
 
 [ext_resource type="Script" path="res://scripts/firefly_player.gd" id="1_2mb1i"]
 [ext_resource type="Texture2D" uid="uid://cq1mdjkc07r31" path="res://assets/FireflySheetRight.svg" id="2_0mekt"]
 [ext_resource type="Texture2D" uid="uid://btmwt4rfyemih" path="res://assets/FireflyDashLeft.svg" id="2_lvb7w"]
 [ext_resource type="Texture2D" uid="uid://dycfdl02fl41h" path="res://assets/FireflyDashRight.svg" id="3_gmsmx"]
 [ext_resource type="Texture2D" uid="uid://26yup363ft74" path="res://assets/FireflySheetLeft.svg" id="5_vsm4p"]
+[ext_resource type="AudioStream" uid="uid://b4n4mkmybp0sl" path="res://audio/FireflyDash.mp3" id="6_j36eq"]
+[ext_resource type="AudioStream" uid="uid://4r2v3mdku1uw" path="res://audio/OrbAbsorb.mp3" id="7_i13yy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0cvvv"]
 atlas = ExtResource("2_lvb7w")
@@ -242,6 +244,14 @@ position = Vector2(-1.5, -5)
 scale = Vector2(0.755127, 0.664062)
 color = Color(1, 0.933333, 0.631373, 1)
 texture = SubResource("GradientTexture2D_kaqjp")
+
+[node name="DashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_j36eq")
+volume_db = -10.0
+
+[node name="OrbAbsorb" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_i13yy")
+volume_db = -11.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
