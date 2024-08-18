@@ -47,7 +47,7 @@ func _start_button_clicked():
 	new_game()
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") and $GameUI.visible:
 		get_tree().paused = not get_tree().paused
 
 
