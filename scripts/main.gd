@@ -27,12 +27,14 @@ var orb_spawn_speed: float = 0.25
 
 # Pause Variables
 var game_paused = true
-var orb_velocity_dict: Dictionary = {}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	node_visibility(false)
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	for child in get_children():
+		child.process_mode = Node.PROCESS_MODE_PAUSABLE
 
 func node_visibility(status):
 	for node in get_children().slice(1):
@@ -44,6 +46,11 @@ func _start_button_clicked():
 	node_visibility(true)
 	new_game()
 
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().paused = not get_tree().paused
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Removes orbs off of player screen
@@ -53,28 +60,10 @@ func _process(delta):
 			var orb_pos = child.position
 			if orb_pos < $FireflyPlayer.screen_size_min or orb_pos > $FireflyPlayer.screen_size_max:
 				child.queue_free()
-	
-	# Pause Game
-	if Input.is_action_just_pressed("ui_cancel"):
-		if game_paused: # unpause
-			$FireflyPlayer/AnimatedSprite2D.play()
-			for timer in timer_list:
-				timer.paused = false
-				game_paused = false
-		else: # pause
-			$FireflyPlayer/AnimatedSprite2D.pause()
-			for timer in timer_list:
-				timer.paused = true
-				game_paused = true
-		$FireflyPlayer.paused = game_paused
-		pause_orbs(game_paused)
-	
-	
 
-	if not game_paused:
+	if not get_tree().paused and glow_level.is_visible_in_tree():
 		glow_level.value -= (25*delta)
-
-	#glow_level.value -= 0.01
+	
 	$GameUI/OrbCount.text = str($FireflyPlayer.total_orb_count)
 	$GameUI/DashNodes/ResetOrbText.text = str(10 - $FireflyPlayer.dash_orb_count)
 	
@@ -88,18 +77,7 @@ func _process(delta):
 		$FireflyPlayer/FireflyTailLight.energy = glow_level.value / 50
 		for light in $GameUI/BackgroundSprite.get_children().slice(0, 3):
 			light.energy = glow_level.value / 125
-	#if glow_level.value == 0:
 
-func pause_orbs(state: bool):
-	for child in get_children():
-		var orb_animated_sprite = child.find_child('AnimatedSprite2D')
-		if child is RigidBody2D and orb_animated_sprite.animation == 'pulse':
-			if game_paused:
-				orb_velocity_dict[str(child.name)] = child.linear_velocity
-			child.sleeping = state
-			if not game_paused:
-				if child.name in orb_velocity_dict.keys():
-					child.linear_velocity = orb_velocity_dict[str(child.name)]
 
 func new_game():
 	game_paused = false
@@ -186,7 +164,7 @@ func x_attack(pos):
 		
 		# Creates a temporary timer in the current session
 		#  that pauses this method for 0.5 seconds
-		await get_tree().create_timer(orb_spawn_speed).timeout
+		await get_tree().create_timer(orb_spawn_speed, false).timeout
 
 func plus_attack(pos):
 	for x in 5:
@@ -196,22 +174,22 @@ func plus_attack(pos):
 		
 		# Creates a temporary timer in the current session
 		#  that pauses this method for 0.5 seconds
-		await get_tree().create_timer(orb_spawn_speed).timeout
+		await get_tree().create_timer(orb_spawn_speed, false).timeout
 
 func ball_attack(pos):
 	for x in 4:
 		for direction in [UP, DOWN, LEFT, RIGHT, TOP_RIGHT, TOP_LEFT, BOTTOM_LEFT, BOTTOM_RIGHT]:
 			create_light_orb(direction, pos)
-		await get_tree().create_timer(orb_spawn_speed).timeout
+		await get_tree().create_timer(orb_spawn_speed, false).timeout
 
 func vert_line_attack(pos):
 	for x in 7:
 		for direction in [UP, DOWN]:
 			create_light_orb(direction, pos)
-		await get_tree().create_timer(orb_spawn_speed).timeout
+		await get_tree().create_timer(orb_spawn_speed, false).timeout
 
 func hori_line_attack(pos):
 	for x in 7:
 		for direction in [LEFT, RIGHT]:
 			create_light_orb(direction, pos)
-		await get_tree().create_timer(orb_spawn_speed).timeout
+		await get_tree().create_timer(orb_spawn_speed, false).timeout
