@@ -155,7 +155,7 @@ texture = SubResource("GradientTexture2D_3y717")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="BackgroundSprite"]
 z_index = 2
-color = Color(0.122252, 0.122252, 0.122252, 1)
+color = Color(0.332881, 0.332881, 0.332881, 1)
 
 [node name="Ui-background" type="Sprite2D" parent="."]
 z_index = 4
@@ -166,6 +166,7 @@ texture = ExtResource("6_pci8m")
 [node name="PointLight2D" type="PointLight2D" parent="Ui-background"]
 position = Vector2(365.25, -37.5)
 scale = Vector2(2.34375, 3.99219)
+energy = 0.6
 texture = SubResource("GradientTexture2D_n46qe")
 
 [node name="Ui-background2" type="Sprite2D" parent="."]
@@ -177,6 +178,7 @@ texture = ExtResource("6_pci8m")
 [node name="PointLight2D" type="PointLight2D" parent="Ui-background2"]
 position = Vector2(-336.375, -40.375)
 scale = Vector2(1.50391, 4.05859)
+energy = 0.6
 texture = SubResource("GradientTexture2D_sjneh")
 
 [node name="ColorRect" type="ColorRect" parent="."]

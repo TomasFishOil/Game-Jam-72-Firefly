@@ -60,16 +60,16 @@ text = "Controls:"
 
 [node name="ControlList" type="Label" parent="."]
 layout_mode = 0
-offset_left = 517.0
-offset_top = 269.0
-offset_right = 1058.0
-offset_bottom = 721.0
+offset_left = 520.0
+offset_top = 262.0
+offset_right = 1119.0
+offset_bottom = 714.0
 theme_override_fonts/font = ExtResource("2_y7ipe")
 theme_override_font_sizes/font_size = 70
-text = "W / →  -  Fly up
-A / ←  -  Fly down
-S / ↓  -  Fly down
-D / →  -  Fly left
+text = "W / Up  -  Fly up
+A / Left  -  Fly left
+S / Down -  Fly down
+D / Right -  Fly right
 Space  -  Dash"
 vertical_alignment = 1
 
