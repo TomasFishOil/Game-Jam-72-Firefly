@@ -207,14 +207,14 @@ radius = 13.5
 height = 36.0
 
 [sub_resource type="Gradient" id="Gradient_vjtt3"]
-offsets = PackedFloat32Array(0, 0.948052)
+offsets = PackedFloat32Array(0.168831, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kaqjp"]
 gradient = SubResource("Gradient_vjtt3")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.87156, 0.12844)
+fill_to = Vector2(0.825688, 0.206422)
 
 [node name="FireflyPlayer" type="Area2D"]
 position = Vector2(1, -1)
@@ -238,7 +238,7 @@ wait_time = 0.3
 wait_time = 5.0
 
 [node name="FireflyTailLight" type="PointLight2D" parent="."]
-position = Vector2(-1, -4.5)
+position = Vector2(-1.5, -5)
 scale = Vector2(0.755127, 0.664062)
 color = Color(1, 0.933333, 0.631373, 1)
 texture = SubResource("GradientTexture2D_kaqjp")

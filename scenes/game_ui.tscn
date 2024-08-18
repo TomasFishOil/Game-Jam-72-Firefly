@@ -151,22 +151,22 @@ texture = ExtResource("5_buf3c")
 [node name="LanternLight1" type="PointLight2D" parent="BackgroundSprite"]
 position = Vector2(-25.1035, -43.3979)
 scale = Vector2(0.71218, 0.699329)
-energy = 0.5
+energy = 0.3
 texture = SubResource("GradientTexture2D_3y717")
 
 [node name="LanternLight2" type="PointLight2D" parent="BackgroundSprite"]
 position = Vector2(35.0701, -40.4173)
 scale = Vector2(0.71218, 0.699329)
-energy = 0.5
+energy = 0.3
 texture = SubResource("GradientTexture2D_3y717")
 
 [node name="LanternLight3" type="PointLight2D" parent="BackgroundSprite"]
 position = Vector2(17.0056, -11.2071)
 scale = Vector2(0.71218, 0.699329)
-energy = 0.5
+energy = 0.3
 texture = SubResource("GradientTexture2D_3y717")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="BackgroundSprite"]
-color = Color(0.172833, 0.172833, 0.172833, 1)
+color = Color(0.244776, 0.244776, 0.244776, 1)
 
 [connection signal="value_changed" from="DashNodes/DashBar" to="." method="_on_dash_bar_value_changed"]

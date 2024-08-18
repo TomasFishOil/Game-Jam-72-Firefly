@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://ing4mhn155jx" path="res://assets/dpcomic.ttf" id="1_nvtb0"]
 [ext_resource type="Script" path="res://main_menu.gd" id="1_piyy4"]
 [ext_resource type="Texture2D" uid="uid://btpvn5lvpsqur" path="res://assets/BasicBackground.svg" id="2_gqe34"]
-[ext_resource type="Texture2D" uid="uid://blmqdiyuvdql" path="res://assets/simple-lantern.svg" id="3_h63gu"]
+[ext_resource type="Texture2D" path="res://assets/simple-lantern.svg" id="3_h63gu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbq1t"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -31,6 +31,7 @@ fill_to = Vector2(0.715596, 0.770642)
 [node name="Main Menu" type="Control"]
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 3.0
@@ -100,15 +101,12 @@ scale = Vector2(5, 5)
 
 [node name="StartLoc" type="Marker2D" parent="LanternSelectLocs"]
 position = Vector2(186, 92.6)
-scale = Vector2(1, 1)
 
 [node name="ControlsLoc" type="Marker2D" parent="LanternSelectLocs"]
 position = Vector2(197, 111.6)
-scale = Vector2(1, 1)
 
 [node name="CreditsLoc" type="Marker2D" parent="LanternSelectLocs"]
 position = Vector2(193.4, 131)
-scale = Vector2(1, 1)
 
 [node name="ButtonSelect" type="Sprite2D" parent="."]
 z_index = 5

@@ -68,9 +68,9 @@ func _process(delta):
 		
 	#Matches float value of glow from bar to light energy value of firefly adequately
 	if glow_level.value != 0:
-		$FireflyPlayer/FireflyTailLight.energy = glow_level.value / 40
+		$FireflyPlayer/FireflyTailLight.energy = glow_level.value / 50
 		for light in $GameUI/BackgroundSprite.get_children().slice(0, 3):
-			light.energy = glow_level.value / 80
+			light.energy = glow_level.value / 125
 	#if glow_level.value == 0:
 
 func pause_orbs(state: bool):
