@@ -49,7 +49,7 @@ layout_mode = 0
 offset_left = 547.0
 offset_top = 376.0
 offset_right = 858.0
-offset_bottom = 603.0
+offset_bottom = 526.0
 
 [node name="ResumeButton" type="Button" parent="ButtonContainer"]
 layout_mode = 2
@@ -63,19 +63,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a5egr")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7cco0")
 theme_override_styles/focus = SubResource("StyleBoxFlat_13he5")
 text = "Resume"
-
-[node name="ControlsButton" type="Button" parent="ButtonContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
-theme_override_fonts/font = ExtResource("1_8wlsp")
-theme_override_font_sizes/font_size = 80
-theme_override_styles/normal = SubResource("StyleBoxFlat_f4cah")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a5egr")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_7cco0")
-theme_override_styles/focus = SubResource("StyleBoxFlat_13he5")
-text = "Controls"
 
 [node name="ReturnButton" type="Button" parent="ButtonContainer"]
 layout_mode = 2
@@ -95,15 +82,12 @@ text = "Main Menu"
 [node name="ResumeLoc" type="Marker2D" parent="LanternSelectLocs"]
 position = Vector2(858, 404)
 
-[node name="ControlsLoc" type="Marker2D" parent="LanternSelectLocs"]
-position = Vector2(871, 478)
-
 [node name="MainMenuLoc" type="Marker2D" parent="LanternSelectLocs"]
-position = Vector2(900, 556)
+position = Vector2(899, 480)
 
 [node name="ButtonSelect" type="Sprite2D" parent="."]
 z_index = 6
-position = Vector2(-181, 192)
+position = Vector2(900, 478)
 scale = Vector2(5, 5)
 texture = ExtResource("2_ux0ku")
 
@@ -118,9 +102,6 @@ position = Vector2(-1, 4)
 [connection signal="focus_entered" from="ButtonContainer/ResumeButton" to="." method="_on_resume_button_focus_entered"]
 [connection signal="mouse_entered" from="ButtonContainer/ResumeButton" to="." method="_on_resume_button_mouse_entered"]
 [connection signal="pressed" from="ButtonContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="focus_entered" from="ButtonContainer/ControlsButton" to="." method="_on_controls_button_focus_entered"]
-[connection signal="mouse_entered" from="ButtonContainer/ControlsButton" to="." method="_on_controls_button_mouse_entered"]
-[connection signal="pressed" from="ButtonContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="focus_entered" from="ButtonContainer/ReturnButton" to="." method="_on_return_button_focus_entered"]
 [connection signal="mouse_entered" from="ButtonContainer/ReturnButton" to="." method="_on_return_button_mouse_entered"]
 [connection signal="pressed" from="ButtonContainer/ReturnButton" to="." method="_on_return_button_pressed"]

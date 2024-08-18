@@ -17,8 +17,7 @@ func _process(_delta):
 func _on_resume_button_pressed():
 	resume_game.emit()
 
-func _on_controls_button_pressed():
-	pass # Replace with function body.
+
 
 func _on_return_button_pressed():
 	exit_game.emit()
@@ -27,8 +26,6 @@ func _on_return_button_pressed():
 func _on_resume_button_mouse_entered():
 	$ButtonContainer/ResumeButton.grab_focus()
 
-func _on_controls_button_mouse_entered():
-	$ButtonContainer/ControlsButton.grab_focus()
 
 func _on_return_button_mouse_entered():
 	$ButtonContainer/ReturnButton.grab_focus()
@@ -36,10 +33,7 @@ func _on_return_button_mouse_entered():
 func _on_resume_button_focus_entered():
 	lantern_select.position = select_locs[0].position
 
-func _on_controls_button_focus_entered():
-	lantern_select.position = select_locs[1].position
-
 func _on_return_button_focus_entered():
-	lantern_select.position = select_locs[2].position
+	lantern_select.position = select_locs[1].position
 
 

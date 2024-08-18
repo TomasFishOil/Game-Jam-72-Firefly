@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=3 uid="uid://856mbnebum54"]
+
+[ext_resource type="Script" path="res://scenes/credits.gd" id="1_6ouvc"]
+[ext_resource type="Texture2D" uid="uid://btpvn5lvpsqur" path="res://assets/BasicBackground.svg" id="2_l61go"]
+[ext_resource type="FontFile" uid="uid://ing4mhn155jx" path="res://assets/dpcomic.ttf" id="3_wt0tj"]
+[ext_resource type="Texture2D" uid="uid://blmqdiyuvdql" path="res://assets/simple-lantern.svg" id="4_y45wn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jj4ll"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u545o"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hllw7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skf23"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Gradient" id="Gradient_h76nm"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_devjn"]
+gradient = SubResource("Gradient_h76nm")
+fill = 1
+fill_from = Vector2(0.509174, 0.495413)
+fill_to = Vector2(0.715596, 0.770642)
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ouvc")
+
+[node name="BasicBackground" type="Sprite2D" parent="."]
+position = Vector2(784, 971)
+scale = Vector2(20.75, 18.8)
+texture = ExtResource("2_l61go")
+
+[node name="ButtonSelect" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(913, 819)
+scale = Vector2(5, 5)
+texture = ExtResource("4_y45wn")
+
+[node name="CreditsText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 182.0
+offset_right = 1410.0
+offset_bottom = 634.0
+theme_override_fonts/font = ExtResource("3_wt0tj")
+theme_override_font_sizes/font_size = 100
+text = "Programming: Tomas and Josh
+Art: Tomas and Josh
+Sound: Tomas
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsText2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 402.0
+offset_right = 1410.0
+offset_bottom = 854.0
+theme_override_fonts/font = ExtResource("3_wt0tj")
+theme_override_font_sizes/font_size = 60
+text = "Special thanks to Zach and Brandon
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+z_index = 5
+layout_mode = 0
+offset_left = 680.0
+offset_top = 783.0
+offset_right = 877.0
+offset_bottom = 874.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
+theme_override_fonts/font = ExtResource("3_wt0tj")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_jj4ll")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u545o")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hllw7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_skf23")
+text = "Back"
+
+[node name="CenteredLight" type="PointLight2D" parent="."]
+position = Vector2(782, 515)
+scale = Vector2(13.9174, 13.5667)
+texture = SubResource("GradientTexture2D_devjn")
+texture_scale = 1.95
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.415981, 0.41598, 0.41598, 1)
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

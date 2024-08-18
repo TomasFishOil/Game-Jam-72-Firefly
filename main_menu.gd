@@ -35,3 +35,11 @@ func _on_controls_button_focus_entered():
 
 func _on_credits_button_focus_entered():
 	lantern_select.position = Vector2(select_locs[2].position[0]*4.96, select_locs[2].position[1]*5.35)
+
+
+func _on_controls_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/control_menu.tscn")
+
+
+func _on_credits_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/credits.tscn")

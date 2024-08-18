@@ -39,6 +39,7 @@ func _ready():
 	$PauseMenu.process_mode = Node.PROCESS_MODE_ALWAYS
 	$GameOver.process_mode = Node.PROCESS_MODE_ALWAYS
 	new_game()
+	$GameMusic.play()
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -82,7 +83,8 @@ func _game_over(value):
 		$GameOver/ButtonContainer/RetryButton.grab_focus()
 		$GameOver.visible = true
 		edit_game_over_text()
-		
+		$GameMusic.stop()
+	
 
 func edit_game_over_text():
 	$GameOver/GameTimeText.text = 'Game Time: ' + total_minutes + ':' + total_seconds
@@ -90,7 +92,7 @@ func edit_game_over_text():
 
 func change_visibility(status):
 	for child in get_children():
-		if child is Timer:
+		if child is Timer or child is AudioStreamPlayer:
 			pass
 		else:
 			child.visible = status
