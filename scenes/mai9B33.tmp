@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnlcsl0h4mgpy"]
+
+[ext_resource type="PackedScene" uid="uid://6orar16yxpcb" path="res://scenes/firefly_player.tscn" id="1_g661c"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_iwp0e"]
+[ext_resource type="PackedScene" uid="uid://sng1scnr7o3y" path="res://scenes/light_projectile.tscn" id="2_vrx3n"]
+[ext_resource type="PackedScene" uid="uid://dgkwqmm3xbdtq" path="res://scenes/game_ui.tscn" id="5_ruomu"]
+[ext_resource type="PackedScene" uid="uid://bm7erg8awbr51" path="res://scenes/glow_bar.tscn" id="5_v25io"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_iwp0e")
+light_scene = ExtResource("2_vrx3n")
+
+[node name="GameUI" parent="." groups=["main_ui"] instance=ExtResource("5_ruomu")]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="FireflyPlayer" parent="." instance=ExtResource("1_g661c")]
+position = Vector2(3, 11)
+
+[node name="LightBarNode" parent="." instance=ExtResource("5_v25io")]
+z_index = 5
+position = Vector2(384, 3)
+
+[node name="LightTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(711, 466)
+
+[node name="Orbs" type="Node2D" parent="."]
+
+[node name="LightSpawn1" type="Marker2D" parent="Orbs"]
+position = Vector2(628, 105)
+
+[node name="LightSpawn2" type="Marker2D" parent="Orbs"]
+position = Vector2(809, 725)
+
+[node name="LightSpawn3" type="Marker2D" parent="Orbs"]
+position = Vector2(895, 534)
+
+[node name="LightSpawn4" type="Marker2D" parent="Orbs"]
+position = Vector2(514, 358)
+
+[node name="LightSpawn5" type="Marker2D" parent="Orbs"]
+position = Vector2(610, 586)
+
+[node name="LightSpawn6" type="Marker2D" parent="Orbs"]
+position = Vector2(900, 226)
+
+[node name="LightSpawn7" type="Marker2D" parent="Orbs"]
+position = Vector2(538, 761)
+
+[node name="MovementBorderStart" type="Marker2D" parent="."]
+position = Vector2(384, 0)
+
+[connection signal="light_contact" from="FireflyPlayer" to="." method="_on_firefly_player_light_contact"]
+[connection signal="bar_level" from="LightBarNode" to="." method="_game_over"]
+[connection signal="timeout" from="LightTimer" to="." method="_on_light_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

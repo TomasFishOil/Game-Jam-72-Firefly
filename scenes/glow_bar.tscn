@@ -25,8 +25,9 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_tfeoq")
 width = 600
 height = 65
-fill = 1
+fill = 2
 fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.752294, 0.084686)
 
 [node name="LightBarNode" type="Node2D"]
 script = ExtResource("1_p5vo1")
@@ -48,8 +49,8 @@ show_percentage = false
 environment = SubResource("Environment_rsoqk")
 
 [node name="BarLight" type="PointLight2D" parent="."]
-position = Vector2(320, 931.5)
-scale = Vector2(1.13, 1.58461)
+position = Vector2(317, 931.5)
+scale = Vector2(1.59, 1.58461)
 color = Color(1, 1, 0.745098, 1)
 energy = 2.0
 texture = SubResource("GradientTexture2D_wfuaj")
