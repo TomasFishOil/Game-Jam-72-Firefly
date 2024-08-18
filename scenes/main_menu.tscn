@@ -45,9 +45,9 @@ script = ExtResource("1_piyy4")
 [node name="TitleText" type="Label" parent="."]
 z_index = 5
 layout_mode = 0
-offset_left = 468.0
+offset_left = 445.0
 offset_top = 198.0
-offset_right = 1178.0
+offset_right = 1155.0
 offset_bottom = 343.0
 theme_override_fonts/font = ExtResource("1_nvtb0")
 theme_override_font_sizes/font_size = 160
@@ -55,15 +55,16 @@ text = "Firefly Hero"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 650.0
+offset_left = 627.0
 offset_top = 475.0
-offset_right = 965.0
-offset_bottom = 661.0
+offset_right = 942.0
+offset_bottom = 756.0
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 z_index = 5
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0.74902, 1)
 theme_override_fonts/font = ExtResource("1_nvtb0")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_mbq1t")
@@ -76,6 +77,7 @@ text = "Start"
 z_index = 5
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0.74902, 1)
 theme_override_fonts/font = ExtResource("1_nvtb0")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_mbq1t")
@@ -88,6 +90,7 @@ text = "Controls"
 z_index = 5
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0.74902, 1)
 theme_override_fonts/font = ExtResource("1_nvtb0")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_mbq1t")
@@ -97,6 +100,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_ogmgq")
 text = "Credits"
 
 [node name="LanternSelectLocs" type="Node2D" parent="."]
+position = Vector2(-23, 0)
 scale = Vector2(5, 5)
 
 [node name="StartLoc" type="Marker2D" parent="LanternSelectLocs"]
@@ -120,7 +124,7 @@ scale = Vector2(20.75, 18.8)
 texture = ExtResource("2_gqe34")
 
 [node name="TitleLight" type="PointLight2D" parent="."]
-position = Vector2(808, 558)
+position = Vector2(785, 558)
 scale = Vector2(13.9174, 13.5667)
 texture = SubResource("GradientTexture2D_j12g7")
 texture_scale = 1.95

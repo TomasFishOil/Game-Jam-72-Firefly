@@ -19,12 +19,12 @@ func _on_start_button_pressed():
 	start_game.emit()
 
 func _on_start_button_mouse_entered():
-	lantern_select.position = Vector2(select_locs[0].position[0]*5.1, select_locs[0].position[1]*5.5)
+	lantern_select.position = Vector2(select_locs[0].position[0]*5, select_locs[0].position[1]*5.5)
 
 
 func _on_controls_button_mouse_entered():
-	lantern_select.position = Vector2(select_locs[1].position[0]*5.1, select_locs[1].position[1]*5.4)
+	lantern_select.position = Vector2(select_locs[1].position[0]*4.98, select_locs[1].position[1]*5.45)
 
 
 func _on_credits_button_mouse_entered():
-	lantern_select.position = Vector2(select_locs[2].position[0]*5.05, select_locs[2].position[1]*5.35)
+	lantern_select.position = Vector2(select_locs[2].position[0]*4.96, select_locs[2].position[1]*5.35)
