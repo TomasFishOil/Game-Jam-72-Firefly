@@ -16,7 +16,7 @@ const BOTTOM_LEFT = PI/2
 @onready var dash_bar = $GameUI/DashNodes/DashBar
 @onready var game_timer = $GameUI/GameTimer
 @onready var light_spawn_locs = $Orbs.get_children() # returns all children of $Orbs as a list
-@onready var timer_list = [$LightTimer, $ScoreTimer, $StartTimer, $FireflyPlayer/DashTimer]
+@onready var timer_list = [$LightTimer, $ScoreTimer, $StartTimer, $FireflyPlayer/DashTimer, $FireflyPlayer/DashCoolDown]
 
 # Global Variabels
 var score: int
@@ -28,22 +28,17 @@ var orb_spawn_speed: float = 0.25
 # Pause Variables
 var game_paused = false
 var orb_velocity_dict: Dictionary = {}
-var orb_stop_timer
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$StartTimer.start()
-	$ScoreTimer.start()
-	orb_stop_timer = get_tree().create_timer(99999)
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Pause Game
 	if Input.is_action_just_pressed("ui_cancel"):
-		print(get_tree())
-		
 		if game_paused: # unpause
 			$FireflyPlayer/AnimatedSprite2D.play()
 			for timer in timer_list:
@@ -56,13 +51,12 @@ func _process(delta):
 				game_paused = true
 		$FireflyPlayer.paused = game_paused
 		pause_orbs(game_paused)
-		orb_stop_timer.set_time_left(0)
-		print(orb_stop_timer.time_left)
-		
 	
 	
-	#if not game_paused:
-	glow_level.value -= (25*delta)
+
+	if not game_paused:
+		glow_level.value -= (25*delta)
+
 	#glow_level.value -= 0.01
 	$GameUI/OrbCount.text = str($FireflyPlayer.total_orb_count)
 	$GameUI/DashNodes/ResetOrbText.text = str(10 - $FireflyPlayer.dash_orb_count)
@@ -91,6 +85,9 @@ func pause_orbs(state: bool):
 					child.linear_velocity = orb_velocity_dict[str(child.name)]
 
 func new_game():
+	$StartTimer.start()
+	$ScoreTimer.start()
+	
 	score = 0
 	$FireflyPlayer.start($StartPosition.position)
 	$FireflyPlayer.screen_size_min = $MovementBorderStart.position
@@ -154,9 +151,6 @@ func _on_light_timer_timeout():
 # Boss Attacks!
 # Creates a singular light orb, method created to reduce reptitive code
 func create_light_orb(direction, pos):
-	#if game_paused:
-		#await orb_stop_timer.timeout
-		
 	# Create light particle from global variable packed scene (look above)
 	var light_particle = light_scene.instantiate()
 	light_particle.position = pos # Sets position to pos, a randomized marker
@@ -205,32 +199,3 @@ func hori_line_attack(pos):
 		for direction in [LEFT, RIGHT]:
 			create_light_orb(direction, pos)
 		await get_tree().create_timer(orb_spawn_speed).timeout
-
-
-# OLD CODE THAT WE MIGHT FIND USEFUL TO LOOK BACK ON, DEPRECATED
-"""
-func og_rand_attack():
-	# Creates new instance of the mob scene
-	var light_particle = light_scene.instantiate()
-	
-	# Choose a random location on Path2D (LightPath)
-	var particle_spawn_loc = $LightPath/LightSpawnLocation
-	particle_spawn_loc.progress_ratio = randf()
-	
-	# Set the light particle's direction perpendicular to the path direction
-	var direction = particle_spawn_loc.rotation + PI / 2
-	
-	# Set the light particle's position to a random location
-	light_particle.position = particle_spawn_loc.position
-	
-	# Add randomness to direction
-	direction += randf_range(-PI / 4, PI / 4)
-	light_particle.rotation = direction
-	
-	# Choose velocity for light particle
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	light_particle.linear_velocity = velocity.rotated(UP)
-	
-	# Spawn the light partile
-	add_child(light_particle)
-"""
