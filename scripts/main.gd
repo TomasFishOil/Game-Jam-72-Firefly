@@ -119,6 +119,7 @@ func _game_over(value):
 		$ScoreTimer.stop()
 		$LightTimer.stop()
 		$FireflyPlayer.hide()
+		$FireflyPlayer.position = Vector2.ZERO
 		$GameUI/DashNodes/DashBar.hide()
 		$LightBarNode/LightBar.hide()
 		print('Final Score:', score)
@@ -149,9 +150,6 @@ func _on_score_timer_timeout():
 		minutes_str = ''
 
 	game_timer.text = minutes_str + str(minutes) + ':' + seconds_str + str(seconds)
-
-func _on_start_timer_timeout():
-	pass
 
 func _on_light_timer_timeout():
 	# Choses a random index from all light spawns, then calls .position on them to get (x, y) coord
