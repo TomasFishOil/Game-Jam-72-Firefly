@@ -31,24 +31,26 @@ var game_paused = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#node_visibility(false)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	for child in get_children():
 		child.process_mode = Node.PROCESS_MODE_PAUSABLE
+	$PauseMenu.process_mode = Node.PROCESS_MODE_ALWAYS
 	new_game()
-#func node_visibility(status):
-	#for node in get_children().slice(1):
-		#if node is CanvasItem:
-			#node.set_visible(status)
 
 func _start_button_clicked():
-	#$MainMenu.queue_free()
-	#node_visibility(true)
 	new_game()
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel") and $GameUI.visible:
+	if event.is_action_pressed("ui_cancel"):
 		get_tree().paused = not get_tree().paused
+		$PauseMenu.visible = get_tree().paused
+
+func _on_pause_menu_resume_game():
+	get_tree().paused = not get_tree().paused
+	$PauseMenu.visible = get_tree().paused
+	
+func _on_pause_menu_exit_game():
+	get_tree().paused = not get_tree().paused
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

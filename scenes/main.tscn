@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnlcsl0h4mgpy"]
+[gd_scene load_steps=7 format=3 uid="uid://dnlcsl0h4mgpy"]
 
 [ext_resource type="PackedScene" uid="uid://6orar16yxpcb" path="res://scenes/firefly_player.tscn" id="1_g661c"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_iwp0e"]
 [ext_resource type="PackedScene" uid="uid://sng1scnr7o3y" path="res://scenes/light_projectile.tscn" id="2_vrx3n"]
+[ext_resource type="PackedScene" uid="uid://tx7atsxayrsg" path="res://scenes/pause_menu.tscn" id="4_tqj4e"]
 [ext_resource type="PackedScene" uid="uid://dgkwqmm3xbdtq" path="res://scenes/game_ui.tscn" id="5_ruomu"]
 [ext_resource type="PackedScene" uid="uid://bm7erg8awbr51" path="res://scenes/glow_bar.tscn" id="5_v25io"]
 
@@ -60,8 +61,13 @@ position = Vector2(538, 761)
 [node name="MovementBorderStart" type="Marker2D" parent="."]
 position = Vector2(384, 0)
 
+[node name="PauseMenu" parent="." instance=ExtResource("4_tqj4e")]
+visible = false
+
 [connection signal="light_contact" from="FireflyPlayer" to="." method="_on_firefly_player_light_contact"]
 [connection signal="bar_level" from="LightBarNode" to="." method="_game_over"]
 [connection signal="timeout" from="LightTimer" to="." method="_on_light_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="exit_game" from="PauseMenu" to="." method="_on_pause_menu_exit_game"]
+[connection signal="resume_game" from="PauseMenu" to="." method="_on_pause_menu_resume_game"]

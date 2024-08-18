@@ -133,7 +133,7 @@ texture = SubResource("GradientTexture2D_j12g7")
 texture_scale = 1.95
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.548963, 0.548963, 0.548963, 1)
+color = Color(0.415981, 0.41598, 0.41598, 1)
 
 [connection signal="focus_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_mouse_entered"]

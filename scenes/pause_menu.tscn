@@ -1,0 +1,126 @@
+[gd_scene load_steps=10 format=3 uid="uid://tx7atsxayrsg"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_6ip6s"]
+[ext_resource type="FontFile" uid="uid://ing4mhn155jx" path="res://assets/dpcomic.ttf" id="1_8wlsp"]
+[ext_resource type="Texture2D" uid="uid://blmqdiyuvdql" path="res://assets/simple-lantern.svg" id="2_ux0ku"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4cah"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5egr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7cco0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13he5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Gradient" id="Gradient_3e3oe"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nfrko"]
+gradient = SubResource("Gradient_3e3oe")
+fill = 1
+fill_from = Vector2(0.509174, 0.513761)
+fill_to = Vector2(0.224771, 0.775229)
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ip6s")
+
+[node name="TransparentCover" type="ColorRect" parent="."]
+z_index = 5
+layout_mode = 0
+offset_left = -82.0
+offset_top = -83.0
+offset_right = 1673.0
+offset_bottom = 1062.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 547.0
+offset_top = 376.0
+offset_right = 858.0
+offset_bottom = 603.0
+
+[node name="ResumeButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
+theme_override_fonts/font = ExtResource("1_8wlsp")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_f4cah")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a5egr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7cco0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_13he5")
+text = "Resume"
+
+[node name="ControlsButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
+theme_override_fonts/font = ExtResource("1_8wlsp")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_f4cah")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a5egr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7cco0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_13he5")
+text = "Controls"
+
+[node name="ReturnButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.74902, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0.74902, 1)
+theme_override_fonts/font = ExtResource("1_8wlsp")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_f4cah")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a5egr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7cco0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_13he5")
+text = "Main Menu"
+
+[node name="LanternSelectLocs" type="Node2D" parent="."]
+
+[node name="ResumeLoc" type="Marker2D" parent="LanternSelectLocs"]
+position = Vector2(858, 404)
+
+[node name="ControlsLoc" type="Marker2D" parent="LanternSelectLocs"]
+position = Vector2(871, 478)
+
+[node name="MainMenuLoc" type="Marker2D" parent="LanternSelectLocs"]
+position = Vector2(900, 556)
+
+[node name="ButtonSelect" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(-181, 192)
+scale = Vector2(5, 5)
+texture = ExtResource("2_ux0ku")
+
+[node name="MenuLight" type="PointLight2D" parent="."]
+position = Vector2(704, 486)
+scale = Vector2(14, 13.259)
+texture = SubResource("GradientTexture2D_nfrko")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2(-1, 4)
+
+[connection signal="focus_entered" from="ButtonContainer/ResumeButton" to="." method="_on_resume_button_focus_entered"]
+[connection signal="mouse_entered" from="ButtonContainer/ResumeButton" to="." method="_on_resume_button_mouse_entered"]
+[connection signal="pressed" from="ButtonContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="focus_entered" from="ButtonContainer/ControlsButton" to="." method="_on_controls_button_focus_entered"]
+[connection signal="mouse_entered" from="ButtonContainer/ControlsButton" to="." method="_on_controls_button_mouse_entered"]
+[connection signal="pressed" from="ButtonContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="focus_entered" from="ButtonContainer/ReturnButton" to="." method="_on_return_button_focus_entered"]
+[connection signal="mouse_entered" from="ButtonContainer/ReturnButton" to="." method="_on_return_button_mouse_entered"]
+[connection signal="pressed" from="ButtonContainer/ReturnButton" to="." method="_on_return_button_pressed"]
