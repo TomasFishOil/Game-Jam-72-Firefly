@@ -14,11 +14,11 @@ bg_color = Color(1, 0.992157, 0.709804, 1)
 background_mode = 3
 glow_enabled = true
 glow_intensity = 1.0
-glow_strength = 0.8
+glow_strength = 0.67
 glow_hdr_scale = 1.0
 
 [sub_resource type="Gradient" id="Gradient_tfeoq"]
-offsets = PackedFloat32Array(0.149351, 0.922078)
+offsets = PackedFloat32Array(0.149351, 0.714286)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_wfuaj"]
@@ -48,8 +48,8 @@ show_percentage = false
 environment = SubResource("Environment_rsoqk")
 
 [node name="BarLight" type="PointLight2D" parent="."]
-position = Vector2(320, 930)
-scale = Vector2(0.97, 1)
+position = Vector2(320, 931.5)
+scale = Vector2(1.13, 1.58461)
 color = Color(1, 1, 0.745098, 1)
 energy = 2.0
 texture = SubResource("GradientTexture2D_wfuaj")

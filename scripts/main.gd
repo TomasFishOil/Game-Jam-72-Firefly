@@ -62,8 +62,8 @@ func _process(delta):
 	
 	
 	#if not game_paused:
-	#glow_level.value -= (25*delta)
-	glow_level.value -= 0.01
+	glow_level.value -= (25*delta)
+	#glow_level.value -= 0.01
 	$GameUI/OrbCount.text = str($FireflyPlayer.total_orb_count)
 	$GameUI/DashNodes/ResetOrbText.text = str(10 - $FireflyPlayer.dash_orb_count)
 	
@@ -74,7 +74,10 @@ func _process(delta):
 		
 	#Matches float value of glow from bar to light energy value of firefly adequately
 	if glow_level.value != 0:
-		$FireflyPlayer/FireflyTailLight.energy = glow_level.value / 10
+		$FireflyPlayer/FireflyTailLight.energy = glow_level.value / 40
+		for light in $GameUI/BackgroundSprite.get_children().slice(0, 3):
+			light.energy = glow_level.value / 80
+	#if glow_level.value == 0:
 
 func pause_orbs(state: bool):
 	for child in get_children():

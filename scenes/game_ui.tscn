@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgkwqmm3xbdtq"]
+[gd_scene load_steps=10 format=3 uid="uid://dgkwqmm3xbdtq"]
 
 [ext_resource type="Script" path="res://scripts/game_ui.gd" id="1_a46f3"]
 [ext_resource type="Texture2D" uid="uid://c2rfeia36a4tp" path="res://assets/dash-bar-over.svg" id="1_cmjtl"]
@@ -6,15 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://bjv4nlbxpj7kd" path="res://assets/light-orb.svg" id="3_kxvye"]
 [ext_resource type="Texture2D" uid="uid://btpvn5lvpsqur" path="res://assets/BasicBackground.svg" id="5_buf3c"]
 
+[sub_resource type="Gradient" id="Gradient_kssye"]
+offsets = PackedFloat32Array(0, 0.00649351)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_67chr"]
+gradient = SubResource("Gradient_kssye")
+
 [sub_resource type="Gradient" id="Gradient_nnmdd"]
-offsets = PackedFloat32Array(0, 0.961039)
+offsets = PackedFloat32Array(0, 0.779221)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_3y717"]
 gradient = SubResource("Gradient_nnmdd")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.862385, 0.133028)
+fill_to = Vector2(0.954128, 0.12844)
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -103,6 +109,11 @@ offset_right = 1602.0
 offset_bottom = 993.0
 color = Color(0, 0, 0, 1)
 
+[node name="PointLight2D" type="PointLight2D" parent="ColorRect2"]
+position = Vector2(290, 499.5)
+scale = Vector2(8.9375, 15.4219)
+texture = SubResource("GradientTexture2D_67chr")
+
 [node name="OrbCount" type="Label" parent="."]
 z_index = 5
 layout_mode = 0
@@ -140,16 +151,22 @@ texture = ExtResource("5_buf3c")
 [node name="LanternLight1" type="PointLight2D" parent="BackgroundSprite"]
 position = Vector2(-25.1035, -43.3979)
 scale = Vector2(0.71218, 0.699329)
+energy = 0.5
 texture = SubResource("GradientTexture2D_3y717")
 
 [node name="LanternLight2" type="PointLight2D" parent="BackgroundSprite"]
 position = Vector2(35.0701, -40.4173)
 scale = Vector2(0.71218, 0.699329)
+energy = 0.5
 texture = SubResource("GradientTexture2D_3y717")
 
 [node name="LanternLight3" type="PointLight2D" parent="BackgroundSprite"]
 position = Vector2(17.0056, -11.2071)
 scale = Vector2(0.71218, 0.699329)
+energy = 0.5
 texture = SubResource("GradientTexture2D_3y717")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="BackgroundSprite"]
+color = Color(0.172833, 0.172833, 0.172833, 1)
 
 [connection signal="value_changed" from="DashNodes/DashBar" to="." method="_on_dash_bar_value_changed"]

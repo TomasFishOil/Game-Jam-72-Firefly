@@ -207,13 +207,14 @@ radius = 13.5
 height = 36.0
 
 [sub_resource type="Gradient" id="Gradient_vjtt3"]
+offsets = PackedFloat32Array(0, 0.948052)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kaqjp"]
 gradient = SubResource("Gradient_vjtt3")
 fill = 1
-fill_from = Vector2(0.513761, 0.477064)
-fill_to = Vector2(0.87156, 0.178899)
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.87156, 0.12844)
 
 [node name="FireflyPlayer" type="Area2D"]
 position = Vector2(1, -1)
@@ -223,7 +224,7 @@ script = ExtResource("1_2mb1i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5wdbi")
-animation = &"right"
+animation = &"dash_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -237,10 +238,9 @@ wait_time = 0.3
 wait_time = 5.0
 
 [node name="FireflyTailLight" type="PointLight2D" parent="."]
-position = Vector2(-0.5, 0)
-scale = Vector2(0.759766, 0.625)
+position = Vector2(-1, -4.5)
+scale = Vector2(0.755127, 0.664062)
 color = Color(1, 0.933333, 0.631373, 1)
-energy = 2.0
 texture = SubResource("GradientTexture2D_kaqjp")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
