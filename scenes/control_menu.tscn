@@ -70,7 +70,8 @@ text = "W / Up  -  Fly up
 A / Left  -  Fly left
 S / Down -  Fly down
 D / Right -  Fly right
-Space  -  Dash"
+Space  -  Dash
+Escape - Pause"
 vertical_alignment = 1
 
 [node name="BackButton" type="Button" parent="."]
